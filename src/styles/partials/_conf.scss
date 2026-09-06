@@ -1,0 +1,23 @@
+@forward "@kirigami/canva/conf" with (
+
+    // Color palette
+    $bg:               #f5f8f6,
+    $surface:          #e7f0ea,
+    $surface-2:        #ffffff,
+    $border:           #d2e1d7,
+    $ink:              #263b30,
+    $ink-muted:        #67796e,
+    $accent:           #c08a2e,
+    $accent-soft:      #f3e6cc,
+    $logo-ink:         #263b30,
+    $logo-fold-light:  #edf5ef,
+    $logo-fold-mid:    #d8eadd,
+
+    // Fonts
+    $font-body:        "Roboto Flex",
+	$font-heading:     "Quicksand",
+    $fonts: (
+		"Roboto Flex": "./assets/fonts/roboto-flex.woff2",
+		"Quicksand":   "./assets/fonts/quicksand.woff2",
+	),
+);
