@@ -22,6 +22,14 @@ image:
   dest:   images
 
 
+# SEO / social metadata. This block opts @kirigami/php-prepros' META class in;
+# an empty map is enough — <title>, description, keywords, Open Graph, Twitter
+# Card, canonical, favicon and apple-touch-icon are derived from the `kirigami:`
+# keys above and each page's PHPDOC (@title, @description, @image, @robots, …).
+# Any tag _layout/header.php already writes by hand is detected and skipped.
+meta: {}
+
+
 prepros:
   network:  true
   format:   true         # pretty-print output; <pre>/<textarea> kept verbatim since @kirigami/php-prepros 1.4.0
