@@ -1,5 +1,13 @@
-
+@use 'sass:list';
+// $colors: img-palette("test/klek.jpg", 5);
+$colors: img-palette("face-de-cul.jpg", 5);
+// $colors: img-palette("la-femme-de-luc-poirier.jpg");
 
 body {
-	background-image: url(img-asset('face-de-cul.jpg', 300, 300, true));
+    // background-color: list.nth($colors, 1);
+    // background-image: linear-gradient(to bottom right, list.nth($colors, 1), list.nth($colors, 3));
+}
+
+body {
+	background-image: img-asset('face-de-cul.jpg', 200, 100, true);
 }

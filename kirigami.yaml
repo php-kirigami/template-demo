@@ -1,17 +1,34 @@
 kirigami:
-  project:     Kirigami Default Template
-  baseurl:     https://php-kirigami.github.io/template-default/
+  project:     Kirigami Demo Template
+  baseurl:     https://php-kirigami.github.io/template-demo/
   banner:      banner.txt
   root:        src
 
 
+image: # image autogenerator
+  # format: avif # image format webp|avif (default: webp)
+  source: assets/images # folder source relative to cwd(); (default: assets/images)
+  dest: images #folder destination relative to config kirigami:root (default: images)
+
+
 prepros:
+  network: true
+  format: true
   before: _layouts/header.php
   after: _layouts/footer.php
 
 
+plugins:
+  - name: "@kirigami/plugin-highlight"
+    active: true
+    options:
+      style: canva
+      color: black
+
+
 sass:
   style: expanded
+
 
 
 tasks:

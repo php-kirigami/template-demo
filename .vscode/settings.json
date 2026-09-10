@@ -19,7 +19,7 @@
         "!**/node_modules/@kirigami/prepros/**"
     ],
     "yaml.schemas": {
-        "https://cdn.jsdelivr.net/npm/@kirigami/kirigami/kirigami.schema.json": "kirigami.yaml",
+        "https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json": "kirigami.yaml",
     },
     "liveServer.settings.port": 5520,
     "liveServer.settings.CustomBrowser": "chrome",
