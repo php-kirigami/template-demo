@@ -7,20 +7,11 @@ Project-specific tasks for this repo. Toolchain / plugin / core work lives in
 
 ## Open
 
-- **Decide the theme toggle: keep inlined, or `import "@kirigami/canva/theme"`.**
-  `src/scripts/kirigami.core.js` currently hand-rolls the toggle (its own comment
-  says this is deliberate — "this starter inlines tiny equivalents instead"). It
-  already mirrors the canva 2.1.0 contract exactly: `kirigami-theme` key,
-  `[data-theme-toggle]` (bare = flip, or `="light|dark|auto"`),
-  `data-theme-state` / `aria-pressed`, `canva:themechange` on `window`, re-sync
-  on OS change while in `auto`. `@kirigami/canva` is already a devDependency.
-  - If we switch: `import "@kirigami/canva/theme"` wires it on import
-    (`bindToggles()`); `@kirigami/canva/observer` covers reveal-on-scroll; the
-    burger nav could move to `@kirigami/canva/components/burger`. That trims
-    `kirigami.core.js` to near-empty — which is the better demo of "you don't
-    write this yourself".
-  - If we keep it inlined: drop the "TODO" framing, it's a design choice. The
-    starter shows the contract without a dependency.
+- **Still trimming `kirigami.core.js`.** The theme toggle now comes from
+  `import "@kirigami/canva/theme"` (commit 032da41); canva floor bumped to
+  `^2.1.0`. Reveal-on-scroll (`@kirigami/canva/observer`) and the burger nav
+  (`@kirigami/canva/components/burger`) could move too, trimming the file to
+  near-empty — the better demo of "you don't write this yourself".
 
 - **`image.format` stays `webp`.** avif fails to encode at several sizes in the
   current `@kirigami/php-wasm` `IMG` build. Revisit when that's fixed upstream.
