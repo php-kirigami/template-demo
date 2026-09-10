@@ -1,170 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <script>
-        (function () {
-            var r = document.documentElement;
-            r.classList.add('js');
-            try {
-                var t = localStorage.getItem('theme');
-                if (t === 'dark' || t === 'light') r.dataset.theme = t;
-            } catch (e) {}
-        })();
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Markdown — Kirigami Demo</title>
-    <meta name="description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
-    <meta name="author" content="The Kirigami Team">
-    <link rel="canonical" href="https://php-kirigami.github.io/template-demo/features/markdown/">
-
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Kirigami Demo">
-    <meta property="og:title" content="Markdown">
-    <meta property="og:description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
-    <meta property="og:url" content="https://php-kirigami.github.io/template-demo/features/markdown/">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
-    <script defer src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
-</head>
-<body class="page-features">
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <header class="site-header">
-        <div class="wrap site-header__inner">
-            <a class="brand" href="../../">
-                <span class="brand__mark" aria-hidden="true"></span>
-                Kirigami Demo            </a>
-
-            <nav class="site-nav" id="site-nav" aria-label="Primary">
-                <ul class="site-nav__list">
-                                            <li>
-                            <a class="site-nav__link"
-                               href="../../"
-                               >Home</a>
-                        </li>
-                                            <li>
-                            <a class="site-nav__link"
-                               href="../../features/"
-                               aria-current="page">Features</a>
-                        </li>
-                                            <li>
-                            <a class="site-nav__link"
-                               href="../../about/"
-                               >About</a>
-                        </li>
-                                    </ul>
+    <head>
+        <script>
+            (function () {
+                var r = document.documentElement;
+                r.classList.add('js');
+                try {
+                    var t = localStorage.getItem('kirigami-theme');
+                    if (t === 'dark' || t === 'light') r.dataset.theme = t;
+                } catch (e) {}
+            })();
+        </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Markdown — Kirigami Demo</title>
+        <meta name="description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
+        <meta name="author" content="The Kirigami Team">
+        <link rel="canonical" href="https://php-kirigami.github.io/template-demo/features/markdown/">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Kirigami Demo">
+        <meta property="og:title" content="Markdown">
+        <meta property="og:description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
+        <meta property="og:url" content="https://php-kirigami.github.io/template-demo/features/markdown/">
+        <meta name="twitter:card" content="summary_large_image">
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?1789063644">
+        <script defer src="../../scripts/kirigami.core.min.js?1789063644"></script>
+    </head>
+    <body class="page-features">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami Demo</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul class="site-nav__list">
+                        <li><a class="site-nav__link" href="../../">Home</a></li>
+                        <li><a class="site-nav__link" href="../../features/" aria-current="page">Features</a></li>
+                        <li><a class="site-nav__link" href="../../about/">About</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Switch between light and dark">
+                    <svg class="theme-toggle__moon" viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
+                    </svg>
+                    <svg class="theme-toggle__sun" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <nav class="breadcrumb wrap" aria-label="Breadcrumb">
+                <ol>
+                    <li><a href="../../">Kirigami Demo</a></li>
+                    <li><a href="../../features/">Features</a></li>
+                    <li aria-current="page">Markdown</li>
+                </ol>
             </nav>
-
-            <button class="theme-toggle" type="button" aria-label="Switch between light and dark">
-                <svg class="theme-toggle__moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"/></svg>
-                <svg class="theme-toggle__sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-            </button>
-
-            <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
-                <span></span>
-            </button>
-        </div>
-    </header>
-
-    <main id="main">
-
-<nav class="breadcrumb wrap" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../features/">Features</a></li><li aria-current="page">Markdown</li></ol></nav>
-<section class="section wrap">
-    <div class="section__head">
-        <p class="eyebrow">Feature</p>
-        <h1 class="section__title">Markdown</h1>
-        <p class="section__intro">A GFM Markdown engine with tables, footnotes, alerts and pluggable shortcodes.</p>
-    </div>
-
-    <div class="prose">
-<p>Everything between the markdown tags is converted with <code>md_to_html()</code> after PHP runs. Common leading indentation is stripped first, so it sits neatly inside indented layout markup.</p>
-<h2 id="gfm-essentials">GFM essentials</h2>
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Surface</th>
-      <th style="text-align:left">Call</th>
-      <th style="text-align:right">Alignment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">Tag</td>
-      <td style="text-align:left"><code>&lt;markdown&gt;</code> block</td>
-      <td style="text-align:right">right</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">Data file</td>
-      <td style="text-align:left"><code>@content _page.md</code></td>
-      <td style="text-align:right">center</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">PHP</td>
-      <td style="text-align:left"><code>md_to_html($string)</code></td>
-      <td style="text-align:right">left</td>
-    </tr>
-  </tbody>
-</table>
-<p>Task lists, strikethrough and autolinks all work:</p>
-<ul class="task-list">
-<li class="task-item"><input type="checkbox" checked disabled /> ATX + Setext headings with an auto <code>id</code></li>
-<li class="task-item"><input type="checkbox" checked disabled /> Footnotes<sup id="fnref:engine"><a href="#fn:engine">1</a></sup></li>
-<li class="task-item"><input type="checkbox" disabled /> <del>A build server</del></li>
-</ul>
-<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title">NOTE</p><p>Alerts — <code>[!NOTE]</code>, <code>[!TIP]</code>, <code>[!WARNING]</code> — render as styled callouts.</p></div>
-<h2 id="shortcode-plugins">Shortcode plugins</h2>
-<p>Registered once in <code>_lib/functions.php</code>, then usable anywhere Markdown is parsed — a markdown block, a <code>.md</code> data file, or a raw <code>md_to_html()</code> call.</p>
-<div class="callout callout-info"><strong>The callout shortcode</strong><br>Wrapped text becomes a styled box, with an optional bold title.</div>
-<div class="checklist"><p class="checklist-title"><strong>Ship checklist</strong></p><ul><li><label><input type="checkbox"> Write the page</label></li><li><label><input type="checkbox"> Run npx kiri export</label></li><li><label><input type="checkbox"> Push to main</label></li></ul></div>
-<p>This project also registers its own <strong>badge</strong> shortcode:</p>
-<span class="badge badge--accent">New</span> <span class="badge badge--ok">Stable</span> <span class="badge badge--muted">Draft</span>
-<div class="footnotes">
-<ol>
-  <li id="fn:engine"><p>The parser is a single ~1200-line zero-dependency PHP class.</p> <a href="#fnref:engine" class="footnote-backref">↩</a></li>
-</ol>
-</div>
-    </div>
-</section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="wrap">
-            <div class="site-footer__grid">
-                <div class="site-footer__col">
-                    <a class="brand" href="../../">
-                        <span class="brand__mark" aria-hidden="true"></span>
-                        Kirigami Demo                    </a>
-                    <p style="margin-top:.6rem;max-width:24ch;color:var(--ink-muted)">
-                        Fold PHP into flat HTML.                    </p>
+            <section class="section wrap">
+                <div class="section__head">
+                    <p class="eyebrow">Feature</p>
+                    <h1 class="section__title">Markdown</h1>
+                    <p class="section__intro">A GFM Markdown engine with tables, footnotes, alerts and pluggable shortcodes.</p>
                 </div>
-
-                <div class="site-footer__col">
-                    <h3>Pages</h3>
-                    <ul>
-                        <li><a href="../../">Home</a></li>
-                        <li><a href="../../features/">Features</a></li>
-                        <li><a href="../../about/">About</a></li>
+                <div class="prose">
+                    <p>Everything between the markdown tags is converted with <code>md_to_html()</code> after PHP runs. Common leading indentation is stripped first, so it sits neatly inside indented layout markup.</p>
+                    <h2 id="gfm-essentials">GFM essentials</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="text-align:left">Surface</th>
+                                <th style="text-align:left">Call</th>
+                                <th style="text-align:right">Alignment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:left">Tag</td>
+                                <td style="text-align:left"><code>&lt;markdown&gt;</code> block</td>
+                                <td style="text-align:right">right</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Data file</td>
+                                <td style="text-align:left"><code>@content _page.md</code></td>
+                                <td style="text-align:right">center</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">PHP</td>
+                                <td style="text-align:left"><code>md_to_html($string)</code></td>
+                                <td style="text-align:right">left</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Task lists, strikethrough and autolinks all work:</p>
+                    <ul class="task-list">
+                        <li class="task-item"><input type="checkbox" checked disabled> ATX + Setext headings with an auto <code>id</code></li>
+                        <li class="task-item"><input type="checkbox" checked disabled> Footnotes<sup id="fnref:engine"><a href="#fn:engine">1</a></sup></li>
+                        <li class="task-item">
+                            <input type="checkbox" disabled>
+                            <del>A build server</del>
+                        </li>
                     </ul>
+                    <div class="markdown-alert markdown-alert-note">
+                        <p class="markdown-alert-title">NOTE</p>
+                        <p>Alerts — <code>[!NOTE]</code>, <code>[!TIP]</code>, <code>[!WARNING]</code> — render as styled callouts.</p>
+                    </div>
+                    <h2 id="shortcode-plugins">Shortcode plugins</h2>
+                    <p>Registered once in <code>_lib/functions.php</code>, then usable anywhere Markdown is parsed — a markdown block, a <code>.md</code> data file, or a raw <code>md_to_html()</code> call.</p>
+                    <div class="callout callout-info"><strong>The callout shortcode</strong><br>Wrapped text becomes a styled box, with an optional bold title.</div>
+                    <div class="checklist">
+                        <p class="checklist-title"><strong>Ship checklist</strong></p>
+                        <ul>
+                            <li><label><input type="checkbox"> Write the page</label></li>
+                            <li><label><input type="checkbox"> Run npx kiri export</label></li>
+                            <li><label><input type="checkbox"> Push to main</label></li>
+                        </ul>
+                    </div>
+                    <p>This project also registers its own <strong>badge</strong> shortcode:</p>
+                    <span class="badge badge--accent">New</span>
+                    <span class="badge badge--ok">Stable</span>
+                    <span class="badge badge--muted">Draft</span>
+                    <div class="footnotes">
+                        <ol>
+                            <li id="fn:engine">
+                                <p>The parser is a single ~1200-line zero-dependency PHP class.</p>
+                                <a href="#fnref:engine" class="footnote-backref">↩</a>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
-
-                <div class="site-footer__col">
-                    <h3>Kirigami</h3>
-                    <ul>
-                        <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
-                        <li><a href="https://github.com/php-kirigami/kiribuild">Deploy action</a></li>
-                        <li><a href="../../sitemap.xml">Sitemap</a></li>
-                    </ul>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami Demo</a>
+                        <p style="margin-top:.6rem;max-width:24ch;color:var(--ink-muted)">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Pages</h3>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../features/">Features</a></li>
+                            <li><a href="../../about/">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">Deploy action</a></li>
+                            <li><a href="../../sitemap.xml">Sitemap</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__bottom">
+                    <span>© 2026 The Kirigami Team. MIT licensed.</span>
+                    <span>Built with Kirigami · last updated September 10, 2026</span>
                 </div>
             </div>
-
-            <div class="site-footer__bottom">
-                <span>&copy; 2026 The Kirigami Team. MIT licensed.</span>
-                <span>Built with Kirigami · last updated September 10, 2026</span>
-            </div>
-        </div>
-    </footer>
-</body>
+        </footer>
+    </body>
 </html>

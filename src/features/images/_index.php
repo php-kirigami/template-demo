@@ -14,13 +14,13 @@ $src_640  = img_asset('detail.jpg', 640);
 $src_1200 = img_asset('detail.jpg', 1200);
 ?>
 
-<?= demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot) ?>
+<?php echo demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot); ?>
 
 <section class="section wrap">
     <div class="section__head">
         <p class="eyebrow">Feature</p>
         <h1 class="section__title">Images</h1>
-        <p class="section__intro"><?= str_htmlesc($abstract) ?></p>
+        <p class="section__intro"><?php echo str_htmlesc($abstract); ?></p>
     </div>
 
     <div class="prose">
@@ -44,8 +44,8 @@ $src_1200 = img_asset('detail.jpg', 1200);
         </p>
 
         <img
-            src="<?= $src_640 ?>"
-            srcset="<?= $src_640 ?> 640w, <?= $src_1200 ?> 1200w"
+            src="<?php echo $src_640; ?>"
+            srcset="<?php echo $src_640; ?> 640w, <?php echo $src_1200; ?> 1200w"
             sizes="(min-width: 800px) 720px, 100vw"
             alt="Responsive image via img_asset()"
             loading="lazy">

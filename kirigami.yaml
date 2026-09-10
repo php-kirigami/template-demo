@@ -24,17 +24,26 @@ image:
 
 prepros:
   network:  true
-  format:   false        # HTML::format() collapses whitespace inside <pre> — off until fixed
+  format:   true         # pretty-print output; <pre>/<textarea> kept verbatim since @kirigami/php-prepros 1.4.0
   before:   _layout/header.php
   after:    _layout/footer.php
   includes: [_lib/functions.php]
 
 
-# plugins:
-#   # @kirigami/plugin-highlight is not published yet — re-enable once it is.
-#   - name: "@kirigami/plugin-highlight"
-#     active: true
-#     options: { style: canva, color: black }
+plugins:
+  # Build-time syntax highlighting. The `prepros:html` hook bakes the
+  # highlight.js `.hljs-*` spans into every fenced block; `sass:after` appends
+  # the theme + embedded JetBrains Mono @font-face + copy-button styles;
+  # `esbuild:after` folds the ~1 KB copy-button script into `js-core`; and
+  # `prepros:php` registers the <highlight lang="…"> authoring tag.
+  # Nothing highlight.js-related is shipped to the browser.
+  - name: "@kirigami/plugin-highlight"
+    active: true
+    options:
+      languages: [php, javascript, bash, shell, json, yaml, css, scss, xml, markdown]
+      theme: auto
+      copyButton: true   # needs an esbuild task — we have `js-core` below
+      tag: true
 
 
 sass:

@@ -17,13 +17,13 @@
 $readme_html = (!empty($readme) && str_starts_with(ltrim($readme), '<')) ? $readme : null;
 ?>
 
-<?= demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot) ?>
+<?php echo demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot); ?>
 
 <section class="section wrap">
     <div class="section__head">
         <p class="eyebrow">Feature</p>
         <h1 class="section__title">Data files</h1>
-        <p class="section__intro"><?= str_htmlesc($abstract) ?></p>
+        <p class="section__intro"><?php echo str_htmlesc($abstract); ?></p>
     </div>
 
     <div class="prose">
@@ -38,8 +38,8 @@ $readme_html = (!empty($readme) && str_starts_with(ltrim($readme), '<')) ? $read
     <div class="stat-grid">
         <?php foreach ($stats->metrics as $m): ?>
             <div class="stat" data-reveal>
-                <div class="stat__num"><?= str_htmlesc($m->value) ?></div>
-                <div class="stat__label"><?= str_htmlesc($m->label) ?></div>
+                <div class="stat__num"><?php echo str_htmlesc($m->value); ?></div>
+                <div class="stat__label"><?php echo str_htmlesc($m->label); ?></div>
             </div>
         <?php endforeach; ?>
     </div>
@@ -54,9 +54,9 @@ $readme_html = (!empty($readme) && str_starts_with(ltrim($readme), '<')) ? $read
     <ul class="article-list">
         <?php foreach ($articles as $a): ?>
             <li class="article" data-reveal>
-                <a href="<?= str_htmlesc($a->url) ?>"><?= str_htmlesc($a->title) ?></a>
-                <span class="article__meta"><?= date('M Y', strtotime($a->date)) ?></span>
-                <p><?= str_htmlesc($a->blurb) ?></p>
+                <a href="<?php echo str_htmlesc($a->url); ?>"><?php echo str_htmlesc($a->title); ?></a>
+                <span class="article__meta"><?php echo date('M Y', strtotime($a->date)); ?></span>
+                <p><?php echo str_htmlesc($a->blurb); ?></p>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -69,7 +69,7 @@ $readme_html = (!empty($readme) && str_starts_with(ltrim($readme), '<')) ? $read
             </p>
             <details>
                 <summary>Kirigami README (fetched at build)</summary>
-                <?= $readme_html ?>
+                <?php echo $readme_html; ?>
             </details>
         </div>
     <?php endif; ?>

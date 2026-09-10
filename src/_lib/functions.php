@@ -128,7 +128,12 @@ function demo_breadcrumb(array $trail, ?string $current, string $relroot): strin
     }
 
     $root = str_replace('\\', '/', realpath(PREPROS::$config->root));
-    $items = '<li><a href="' . $relroot . '">Home</a></li>';
+
+    // First crumb: the site itself. Use the `project` name (same value the LD
+    // BreadcrumbList uses for its leading ListItem) so the visible trail and the
+    // JSON-LD trail name the home the same way — Google wants them to match.
+    $home  = PREPROS::$config->data->project ?? 'Home';
+    $items = '<li><a href="' . $relroot . '">' . str_htmlesc($home) . '</a></li>';
 
     foreach ($trail as $crumb) {
         $dir = str_replace('\\', '/', dirname($crumb->file));

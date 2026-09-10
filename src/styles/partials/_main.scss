@@ -552,25 +552,9 @@ a {
         font-style: italic;
     }
 
-    :not(pre) > code {
-        padding: 0.15em 0.4em;
-        border-radius: 5px;
-        background: var(--surface);
-        font-size: 0.88em;
-    }
-
-    pre {
-        overflow-x: auto;
-        padding: 1.1rem 1.25rem;
-        border-radius: var(--radius);
-        background: #201d1a;
-        color: #f3ede1;
-        font-size: 0.85rem;
-        line-height: 1.6;
-        tab-size: 2;
-
-        code { color: inherit; }
-    }
+    // Code blocks (`pre`, `.hljs`, `.hljs-*`) and inline `code` are styled by
+    // @kirigami/plugin-highlight's `theme: auto` stylesheet, appended to this
+    // build via its `sass:after` hook.
 
     table {
         width: 100%;
@@ -688,29 +672,10 @@ a {
 }
 
 
-// ── Copy-to-clipboard button (added by kirigami.core.js) ─────────────────────
-
-.code-block { position: relative; }
-.copy-btn {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.6rem;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.72rem;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    color: #f3ede1;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity var(--transition-duration), background var(--transition-duration);
-
-    &:hover { background: rgba(255, 255, 255, 0.2); }
-    &[data-copied] { color: #9fe0ac; }
-}
-.code-block:hover .copy-btn,
-.copy-btn:focus-visible { opacity: 1; }
+// The hover "Copy" button on code blocks (`.hljs-copy-wrap` / `.hljs-copy`) is
+// provided by @kirigami/plugin-highlight's `copyButton` option: layout appended
+// to this build via `sass:after`, script bundled into `js-core` via
+// `esbuild:after`.
 
 
 // ── Swatches (custom `<swatches>` tag) ───────────────────────────────────────

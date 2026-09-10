@@ -11,21 +11,21 @@
 $children = fs_get_children();
 ?>
 
-<?= demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot) ?>
+<?php echo demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot); ?>
 
 <section class="section wrap">
     <div class="section__head">
         <p class="eyebrow">Reference</p>
         <h1 class="section__title">Features</h1>
-        <p class="section__intro"><?= str_htmlesc($abstract) ?></p>
+        <p class="section__intro"><?php echo str_htmlesc($abstract); ?></p>
     </div>
 
     <div class="grid">
         <?php foreach ($children as $child): ?>
-            <a class="card" href="<?= $relroot . 'features/' . basename(dirname($child->file)) ?>/" data-reveal>
-                <span class="card__kicker"><?= str_htmlesc($child->kicker ?? 'Feature') ?></span>
-                <span class="card__title"><?= str_htmlesc($child->title ?? 'Untitled') ?></span>
-                <span class="card__text"><?= str_htmlesc($child->abstract ?? '') ?></span>
+            <a class="card" href="<?php echo $relroot . 'features/' . basename(dirname($child->file)); ?>/" data-reveal>
+                <span class="card__kicker"><?php echo str_htmlesc($child->kicker ?? 'Feature'); ?></span>
+                <span class="card__title"><?php echo str_htmlesc($child->title ?? 'Untitled'); ?></span>
+                <span class="card__text"><?php echo str_htmlesc($child->abstract ?? ''); ?></span>
                 <span class="card__more">Open →</span>
             </a>
         <?php endforeach; ?>

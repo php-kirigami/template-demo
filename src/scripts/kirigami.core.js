@@ -2,8 +2,10 @@
  * Bundled by the `js-core` esbuild task → scripts/kirigami.core.min.js
  *
  * Progressive enhancement only — the site is fully usable with JS disabled.
- * Kept dependency-free on purpose; `@kirigami/canva/scripts/*` offers the same
- * helpers if you'd rather import them.
+ * Kept dependency-free on purpose. `@kirigami/canva/theme` ships this exact
+ * theme-toggle contract as an import (and `@kirigami/canva/observer` the
+ * reveal-on-scroll one) — this starter inlines tiny equivalents instead.
+ * The code-block copy button is handled by @kirigami/plugin-highlight.
  */
 
 const documentReady = (fn) =>
@@ -13,16 +15,44 @@ const documentReady = (fn) =>
 
 documentReady(() => {
 
-    /* ── Theme toggle ──────────────────────────────────────────────── */
+    /* ── Theme toggle ──────────────────────────────────────────────────
+       Mirrors @kirigami/canva/theme: persists under `kirigami-theme`, wires
+       any [data-theme-toggle] control (bare = flip, or ="light|dark|auto"),
+       reflects the resolved theme back onto it, and fires `canva:themechange`
+       on window. The <head> has an inline FOUC guard that reads the same key. */
     const root = document.documentElement;
-    const prefersDark = matchMedia('(prefers-color-scheme: dark)');
+    const media = matchMedia('(prefers-color-scheme: dark)');
+    const stored = () => { try { return localStorage.getItem('kirigami-theme') || 'auto'; } catch { return 'auto'; } };
+    const resolved = () => {
+        const a = root.dataset.theme;
+        return a === 'light' || a === 'dark' ? a : (media.matches ? 'dark' : 'light');
+    };
 
-    document.querySelector('.theme-toggle')?.addEventListener('click', () => {
-        const current = root.dataset.theme || (prefersDark.matches ? 'dark' : 'light');
-        const next = current === 'dark' ? 'light' : 'dark';
-        root.dataset.theme = next;
-        try { localStorage.setItem('theme', next); } catch {}
+    const sync = () => {
+        const theme = resolved();
+        document.querySelectorAll('[data-theme-toggle]').forEach((el) => {
+            el.dataset.themeState = theme;
+            el.setAttribute('aria-pressed', String(theme === 'dark'));
+        });
+        dispatchEvent(new CustomEvent('canva:themechange', { detail: { theme, preference: stored() } }));
+    };
+
+    const setPref = (pref) => {
+        const forced = pref === 'light' || pref === 'dark';
+        try { forced ? localStorage.setItem('kirigami-theme', pref) : localStorage.removeItem('kirigami-theme'); } catch {}
+        if (forced) root.dataset.theme = pref; else delete root.dataset.theme;
+        sync();
+    };
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            const attr = el.getAttribute('data-theme-toggle');
+            setPref(['auto', 'light', 'dark'].includes(attr) ? attr : (resolved() === 'dark' ? 'light' : 'dark'));
+        });
     });
+    media.addEventListener('change', () => { if (stored() === 'auto') sync(); });
+    sync();
 
     /* ── Mobile nav toggle ─────────────────────────────────────────── */
     const toggle = document.querySelector('.nav-toggle');
@@ -32,34 +62,6 @@ documentReady(() => {
         const open = nav.hasAttribute('data-open');
         nav.toggleAttribute('data-open', !open);
         toggle.setAttribute('aria-expanded', String(!open));
-    });
-
-    /* ── Copy button on every code block ───────────────────────────── */
-    document.querySelectorAll('.prose pre').forEach((pre) => {
-        const wrap = document.createElement('div');
-        wrap.className = 'code-block';
-        pre.replaceWith(wrap);
-        wrap.append(pre);
-
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'copy-btn';
-        btn.textContent = 'Copy';
-        wrap.append(btn);
-
-        btn.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(pre.innerText.trim());
-                btn.textContent = 'Copied';
-                btn.setAttribute('data-copied', '');
-                setTimeout(() => {
-                    btn.textContent = 'Copy';
-                    btn.removeAttribute('data-copied');
-                }, 1600);
-            } catch {
-                btn.textContent = 'Press ⌘C';
-            }
-        });
     });
 
     /* ── Reveal-on-scroll ──────────────────────────────────────────── */

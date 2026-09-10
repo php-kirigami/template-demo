@@ -19,10 +19,10 @@ $features = [
     <div class="hero__folds" aria-hidden="true"></div>
     <div class="hero__inner wrap">
         <span class="hero__eyebrow">PHP 8.5 · WebAssembly · zero server</span>
-        <h1 class="hero__title"><?= str_htmlesc($tagline) ?></h1>
-        <p class="hero__lead"><?= str_htmlesc($abstract) ?></p>
+        <h1 class="hero__title"><?php echo str_htmlesc($tagline); ?></h1>
+        <p class="hero__lead"><?php echo str_htmlesc($abstract); ?></p>
         <div class="hero__actions">
-            <a class="btn btn--primary" href="<?= $relroot ?>features/">Explore the features</a>
+            <a class="btn btn--primary" href="<?php echo $relroot; ?>features/">Explore the features</a>
             <a class="btn btn--ghost" href="https://github.com/php-kirigami/kirigami">View on GitHub</a>
         </div>
     </div>
@@ -41,10 +41,10 @@ $features = [
 
     <div class="grid">
         <?php foreach ($features as [$href, $name, $kicker, $text]): ?>
-            <a class="card" href="<?= $relroot . $href ?>" data-reveal>
-                <span class="card__kicker"><?= $kicker ?></span>
-                <span class="card__title"><?= $name ?></span>
-                <span class="card__text"><?= $text ?></span>
+            <a class="card" href="<?php echo $relroot . $href; ?>" data-reveal>
+                <span class="card__kicker"><?php echo $kicker; ?></span>
+                <span class="card__title"><?php echo $name; ?></span>
+                <span class="card__text"><?php echo $text; ?></span>
                 <span class="card__more">Open →</span>
             </a>
         <?php endforeach; ?>
@@ -57,33 +57,31 @@ $features = [
         <h2 class="section__title">One config file, one command</h2>
     </div>
     <div class="prose">
+        <markdown>
+        ```yaml
+        # kirigami.yaml
+        kirigami:
+          project: Kirigami Demo
+          baseurl: https://php-kirigami.github.io/template-demo
+          root:    src
 
-<markdown>
-```yaml
-# kirigami.yaml
-kirigami:
-  project: Kirigami Demo
-  baseurl: https://php-kirigami.github.io/template-demo
-  root:    src
+        prepros:
+          before:   _layout/header.php
+          after:    _layout/footer.php
+          includes: [_lib/functions.php]
 
-prepros:
-  before:   _layout/header.php
-  after:    _layout/footer.php
-  includes: [_lib/functions.php]
+        tasks:
+          - { name: js-core,  type: esbuild, entry: scripts/kirigami.core.js }
+          - { name: css-core, type: sass,    entry: styles/kirigami.core.scss }
+        ```
 
-tasks:
-  - { name: js-core,  type: esbuild, entry: scripts/kirigami.core.js }
-  - { name: css-core, type: sass,    entry: styles/kirigami.core.scss }
-```
+        ```shell
+        $ npx kiri build      # dev build — every task once
+        $ npx kiri watch      # rebuild on change (no server)
+        $ npx kiri export     # production build into dist/
+        ```
 
-```console
-$ npx kiri build      # dev build — every task once
-$ npx kiri watch      # rebuild on change (no server)
-$ npx kiri export     # production build into dist/
-```
-
-{% badge accent Zero deps %} {% badge ok No PHP install %} {% badge muted No headless browser %}
-</markdown>
-
+        {% badge accent Zero deps %} {% badge ok No PHP install %} {% badge muted No headless browser %}
+        </markdown>
     </div>
 </section>
