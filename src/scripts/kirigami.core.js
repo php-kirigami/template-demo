@@ -9,9 +9,13 @@
 // ="light|dark|auto"), persists under `kirigami-theme`, reflects the resolved
 // theme back onto the control, keeps it in sync with OS changes in auto mode,
 // and fires `canva:themechange` on window. The <head> has an inline FOUC guard
-// that reads the same key. `@kirigami/canva/observer` similarly ships the
-// reveal-on-scroll contract — this starter keeps a tiny equivalent inline.
+// that reads the same key.
 import "@kirigami/canva/theme";
+
+// Reveal on scroll: adds `is-in` to each [data-reveal] as it enters the
+// viewport. The CSS half (hide until `.is-in`, gated on `.js`) is in
+// styles/partials/_main.scss.
+import "@kirigami/canva/reveal";
 
 const documentReady = (fn) =>
     document.readyState === 'loading'
@@ -29,29 +33,4 @@ documentReady(() => {
         nav.toggleAttribute('data-open', !open);
         toggle.setAttribute('aria-expanded', String(!open));
     });
-
-    /* ── Reveal-on-scroll ──────────────────────────────────────────── */
-    const reveal = [...document.querySelectorAll('[data-reveal]')];
-    const show = (el) => el.classList.add('is-in');
-
-    if (reveal.length && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach((e) => {
-                if (!e.isIntersecting) return;
-                show(e.target);
-                io.unobserve(e.target);
-            });
-        }, { rootMargin: '0px 0px -8% 0px' });
-
-        // Anything already on screen shows now; the rest waits for scroll.
-        reveal.forEach((el) => {
-            if (el.getBoundingClientRect().top < innerHeight) show(el);
-            else io.observe(el);
-        });
-
-        // Safety net: never leave content hidden.
-        setTimeout(() => reveal.forEach(show), 1200);
-    } else {
-        reveal.forEach(show);
-    }
 });
