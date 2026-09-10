@@ -103,7 +103,7 @@ Generic reference — safe to copy verbatim between projects.
 | `npx kiri export` | Production build. Fires `before-export` then `before-build`; forces the `prepros` task, all `tasks`, and a `dist` copy into `export.path`; stamps the banner; fires `after-export`. |
 | `npx kiri watch` | Dev mode: watches files for `esbuild` / `sass` / `prepros` tasks and rebuilds on change (150 ms debounce, batched). `node_modules/`, `.git/`, `dist/` always ignored. `Ctrl+C` to stop. No server. |
 | `npx kiri run <script> [args…]` | Run `scripts/<script>.php` in the Kirigami PHP runtime (full class library, `PREPROS::$config->data` populated). Extra words become `$argv` entries. |
-| `npx kiri create <template> [dir]` | Scaffold from an official `template-*` repo. `--list` / `-l` to list. Target dir must be empty, unless it has a `package.json` (then the template's `package.json` is deep-merged, existing values win, and `npm install` runs). |
+| `npx kiri create [template] [dir]` | Scaffold from an official `template-*` repo (no args → interactive wizard: template, dir, name / description / author / base URL → written into `package.json` + `kirigami.yaml`). `--list` / `-l` to list. Extraction never overwrites (existing files kept, `package.json` deep-merged); then `git init` + initial commit (unless already in a repo or `--no-git`) and `npm install` (unless `--no-install`). |
 | `npx kiri phpinfo` | Print `phpinfo()` from the embedded runtime. `--md` / `--json` for other formats. |
 | `npx kiri --version` | `kiri` version + bundled PHP version. |
 
@@ -144,6 +144,7 @@ prepros:                          # PHP → HTML compiler. Present (even empty) 
   before:   _layouts/header.php   # PHP file (rel. to root) included before every page body
   after:    _layouts/footer.php   # PHP file included after every page body
   format:   true                  # pretty-print HTML output (4-space indent). default false
+  head:     true                  # default true — auto-inject the theme guard + a <link>/<script> per sass/esbuild task into every page. `false` to opt out
   network:  false                 # allow outbound HTTP(S) in the WASM runtime (remote @tags, CURL, SCRAPER)
   mountext: [.svg, .webp]          # extra extensions auto-mounted into the virtual FS
   includes: [_lib/functions.php]   # PHP include_once'd before any page renders — register tags/hooks/MD plugins here
@@ -182,8 +183,8 @@ tasks:                            # ordered build pipeline, on top of implicit p
 
 | `type` | Purpose | Required | Optional | Output |
 |---|---|---|---|---|
-| `esbuild` | Bundle + minify a JS/TS entry (`bundle`, `treeShaking`, `target es2020`). Build + watch. | `name`, `type`, `entry` | `force` | `<entry>.min.js` (+ `.map` outside export) |
-| `sass` | Compile a `.scss`/`.sass` entry (`style: compressed`), re-minified with csso on export. Build + watch. | `name`, `type`, `entry` | `force` | `<entry>.min.css` (+ `.css.map` outside export) |
+| `esbuild` | Bundle + minify a JS/TS entry (`bundle`, `treeShaking`, `target es2020`). Build + watch. | `name`, `type`, `entry` | `force`, `head` | `<entry>.min.js` (+ `.map` outside export) |
+| `sass` | Compile a `.scss`/`.sass` entry (`style: compressed`), re-minified with csso on export. Build + watch. | `name`, `type`, `entry` | `force`, `head` | `<entry>.min.css` (+ `.css.map` outside export) |
 | `prepros` | Render pages + `sitemap.xml`. Watch-only unless forced/implicit. `target` renders just one file/subdir. | `name`, `type` | `target`, `force` | `*.html`, `sitemap.xml`, `robots.txt` |
 | `dist` | Copy `kirigami.root` into `path`, stamping the banner. Implicit during `kiri export` only. | `name`, `type`, `path` | `ignore`, `force` | the exported tree |
 
@@ -191,6 +192,26 @@ tasks:                            # ordered build pipeline, on top of implicit p
 custom importer that also accepts an implicit `styles/` prefix
 (`@use '@kirigami/canva/conf'` → `@kirigami/canva/styles/conf`) and falls back to
 the global `npm root -g`.
+
+### Managed `<head>`
+
+Unless `prepros.head` is `false`, every rendered page's `<head>` is auto-wired
+and `header.php` should **not** hand-write any of it:
+
+- a small theme/FOUC guard as the first child of `<head>` (adds the `js` class,
+  applies the stored `data-theme` before first paint — pair it with
+  `@kirigami/canva`'s `$theme` / `theme` script);
+- a `<link rel="stylesheet">` for every `sass` task output;
+- a `<script>` (no `defer`, just before `</body>`) for every `esbuild` task output.
+
+Paths are per-page-relative and carry a `?<timestamp>` cache-bust. A file already
+referenced in the page is left alone (you can still place one by hand). Skip a
+single task's tag with `head: false` on that task.
+
+With `format: true`, `HTML::format()` also indents each `<pre><code>` block to
+its nesting depth (so the HTML source stays readable) and `prepros.head` injects
+a small script that de-indents it again before display — `@kirigami/plugin-highlight`
+does the same at build time, so highlighted blocks skip the runtime step.
 
 ---
 
@@ -584,8 +605,12 @@ adds pure helpers: `wash()`, `hex6()`, `hexbin()`, `str-replace()`,
 `url-encode()`, `svg-url()`, `apply-colors()`. (`styles/main` and the `Burger` JS
 component are still stubs.)
 
-Browser JS: `@kirigami/canva/scripts/dom` (`create()`), `.../scripts/helpers`
-(`busy()`, `working()`, `preloadImage()`, `documentReady()`).
+Browser JS (canva ≥ 2.0.0 subpaths, no `scripts/` segment):
+`@kirigami/canva/dom` (`create()`), `@kirigami/canva/helpers` (`busy()`,
+`working()`, `preloadImage()`, `documentReady()`), `@kirigami/canva/theme`
+(`data-theme` toggle), `@kirigami/canva/observer` (`register()` — rewrites
+non-closing authoring tags like `<youtube id="…">`; import for the side effect,
+then register from a plugin).
 
 ### Native Sass functions (every `sass` task)
 
@@ -626,23 +651,72 @@ originals in `assets/images/`; never hand-edit `src/images/`.
 
 ## Deployment (`php-kirigami/kiribuild`)
 
+This project ships `.github/workflows/page.yml`. On every push to `main` it:
+builds with [`php-kirigami/kiribuild@v2`](https://github.com/php-kirigami/kiribuild)
+(Node 24 + `kiri` CLI + `kiri export`), **commits back anything the build
+regenerated** (e.g. `src/images/` derivatives — `dist/` stays git-ignored and
+ships via the Pages artifact), then publishes `dist/` to GitHub Pages.
+
 ```yaml
-# .github/workflows/deploy.yml
+# .github/workflows/page.yml
 name: Build & Deploy
+
+env:
+  TZ: America/Toronto
+
 on:
-  push: { branches: [main] }
-permissions: { contents: read, pages: write, id-token: write }
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write      # commit files the build regenerated
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: php-kirigami/kiribuild@v1
+      - uses: actions/checkout@v7
+
+      - uses: php-kirigami/kiribuild@v2
+        with:
+          node-version: '24'
+
+      - name: Commit regenerated files
+        shell: bash
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name  "kirigami[bot]"
+            git config user.email "kirigami-bot@users.noreply.github.com"
+            git add -A
+            git commit -m "chore: update generated files [skip ci]"
+            git push
+          else
+            echo "Nothing to commit."
+          fi
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v5
 ```
 
-The action runs `kiri export` and deploys the result (typically GitHub Pages).
-See the [action's docs](https://github.com/php-kirigami/kiribuild) for inputs
-(export path, Pages options, …).
+v2 of the action does **only** Node + CLI + `kiri export`; checkout, the
+commit-back, and the Pages upload/deploy live in the workflow (v1 did all of it
+inside the action). Enable Pages once per repo: **Settings → Pages → Source:
+GitHub Actions**. See the [action's docs](https://github.com/php-kirigami/kiribuild)
+for its inputs.
 
 ---
 
