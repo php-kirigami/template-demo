@@ -1,5 +1,21 @@
 {
-  "dependencies": {
-    "swiper": "^14.2.0"
+  "name": "template-demo",
+  "version": "1.0.0",
+  "description": "A guided tour of Kirigami — built with Kirigami.",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=10.2.3"
+  },
+  "scripts": {
+    "build": "kiri build",
+    "watch": "kiri watch",
+    "export": "kiri export"
+  },
+  "devDependencies": {
+    "@kirigami/canva": "^1.0.1",
+    "@kirigami/kirigami": "^1.1.3"
   }
 }

@@ -1,24 +1,48 @@
+// Design tokens for the demo site.
+// Every value here overrides a `@kirigami/canva` default and cascades to :root
+// as a CSS custom property (--bg, --accent, …). See canva/styles/conf.scss.
 
 @forward "@kirigami/canva/conf" with (
 
-    // Color palette
-    $bg:               #f5f8f6,
-    $surface:          #e7f0ea,
-    $surface-2:        #ffffff,
-    $border:           #d2e1d7,
-    $ink:              #263b30,
-    $ink-muted:        #67796e,
-    $accent:           #c08a2e,
-    $accent-soft:      #f3e6cc,
-    $logo-ink:         #263b30,
-    $logo-fold-light:  #edf5ef,
-    $logo-fold-mid:    #d8eadd,
+    // ── Light palette — warm "washi paper" ────────────────────────
+    $bg:              #f6f3ec,
+    $surface:         #efe9dd,
+    $surface-2:       #fffdf8,
+    $border:          #e0d7c4,
+    $ink:             #241f1a,
+    $ink-muted:       #6c6357,
+    $accent:          #bf5330,
+    $accent-soft:     #f3ddce,
+    $logo-ink:        #241f1a,
+    $logo-fold-light: #f3ddce,
+    $logo-fold-mid:   #e6c3ad,
 
-    // Fonts
-    $font-body:        "Roboto Flex",
-	$font-heading:     "Quicksand",
+    // ── Dark palette — "washi at night" ───────────────────────────
+    // `$dark` as a map = start from canva's built-in dark palette, override
+    // only these keys. `$theme: both` = follow the OS, but let a
+    // <html data-theme="…"> attribute force either way.
+    $theme: both,
+    $dark: (
+        "bg":              #1c1a17,
+        "surface":         #262220,
+        "surface-2":       #211d1a,
+        "border":          #3b352e,
+        "ink":             #efe7d9,
+        "ink-muted":       #a29885,
+        "accent":          #e8794f,
+        "accent-soft":     #3a2820,
+        "logo-ink":        #efe7d9,
+        "logo-fold-light": #3a2c22,
+        "logo-fold-mid":   #2c2620,
+    ),
+
+    // ── Type ──────────────────────────────────────────────────────
+    $font-base:       19,
+    $font-break:      1180,
+    $font-body:       "Roboto Flex",
+    $font-heading:    "Quicksand",
     $fonts: (
-		"Roboto Flex": "assets/fonts/roboto-flex.woff2",
-		"Quicksand":   "assets/fonts/quicksand.woff2",
-	),
+        "Roboto Flex": "assets/fonts/roboto-flex.woff2",
+        "Quicksand":   "assets/fonts/quicksand.woff2",
+    ),
 );

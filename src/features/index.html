@@ -14,27 +14,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kirigami Demo — Fold PHP into flat HTML.</title>
+    <title>Features — Kirigami Demo</title>
     <meta name="description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
     <meta name="author" content="The Kirigami Team">
-    <link rel="canonical" href="https://php-kirigami.github.io/template-demo/">
+    <link rel="canonical" href="https://php-kirigami.github.io/template-demo/features/">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Kirigami Demo">
-    <meta property="og:title" content="Kirigami Demo">
+    <meta property="og:title" content="Features">
     <meta property="og:description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
-    <meta property="og:url" content="https://php-kirigami.github.io/template-demo/">
+    <meta property="og:url" content="https://php-kirigami.github.io/template-demo/features/">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="./styles/kirigami.core.min.css?###TIMESTAMP###">
-    <script defer src="./scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    <link rel="stylesheet" href="../styles/kirigami.core.min.css?###TIMESTAMP###">
+    <script defer src="../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
 </head>
-<body class="page-home">
+<body class="page-features">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
         <div class="wrap site-header__inner">
-            <a class="brand" href="./">
+            <a class="brand" href="../">
                 <span class="brand__mark" aria-hidden="true"></span>
                 Kirigami Demo            </a>
 
@@ -42,17 +42,17 @@
                 <ul class="site-nav__list">
                                             <li>
                             <a class="site-nav__link"
-                               href="./"
-                               aria-current="page">Home</a>
+                               href="../"
+                               >Home</a>
                         </li>
                                             <li>
                             <a class="site-nav__link"
-                               href="./features/"
-                               >Features</a>
+                               href="../features/"
+                               aria-current="page">Features</a>
                         </li>
                                             <li>
                             <a class="site-nav__link"
-                               href="./about/"
+                               href="../about/"
                                >About</a>
                         </li>
                                     </ul>
@@ -71,91 +71,46 @@
 
     <main id="main">
 
-<section class="hero">
-    <div class="hero__folds" aria-hidden="true"></div>
-    <div class="hero__inner wrap">
-        <span class="hero__eyebrow">PHP 8.5 · WebAssembly · zero server</span>
-        <h1 class="hero__title">Fold PHP into flat HTML.</h1>
-        <p class="hero__lead">A guided tour of Kirigami — a zero-dependency static site generator that compiles PHP templates to plain HTML.</p>
-        <div class="hero__actions">
-            <a class="btn btn--primary" href="./features/">Explore the features</a>
-            <a class="btn btn--ghost" href="https://github.com/php-kirigami/kirigami">View on GitHub</a>
-        </div>
-    </div>
-</section>
-
+<nav class="breadcrumb wrap" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li aria-current="page">Features</li></ol></nav>
 <section class="section wrap">
     <div class="section__head">
-        <p class="eyebrow">What you get</p>
-        <h2 class="section__title">Every page is just PHP that runs once</h2>
-        <p class="section__intro">
-            Kirigami compiles the templates below to dependency-free static HTML.
-            Each card is a real page in this site — open one to see the feature and
-            its source side by side.
-        </p>
+        <p class="eyebrow">Reference</p>
+        <h1 class="section__title">Features</h1>
+        <p class="section__intro">Each page here demonstrates one Kirigami capability with its source shown alongside the result.</p>
     </div>
 
     <div class="grid">
-                    <a class="card" href="./features/markdown/" data-reveal>
+                    <a class="card" href="../features/markdown/" data-reveal>
                 <span class="card__kicker">Content</span>
                 <span class="card__title">Markdown</span>
-                <span class="card__text">A GFM Markdown engine with tables, footnotes, alerts and shortcode plugins — usable from a tag, a data file or PHP.</span>
+                <span class="card__text">A GFM Markdown engine with tables, footnotes, alerts and pluggable shortcodes.</span>
                 <span class="card__more">Open →</span>
             </a>
-                    <a class="card" href="./features/images/" data-reveal>
+                    <a class="card" href="../features/images/" data-reveal>
                 <span class="card__kicker">Assets</span>
                 <span class="card__title">Images</span>
-                <span class="card__text">One image autogenerator, three surfaces. Resize, crop and sample palettes with no native dependency anywhere.</span>
+                <span class="card__text">One image autogenerator, three surfaces — Sass, PHP and an HTML tag — with no native dependency.</span>
                 <span class="card__more">Open →</span>
             </a>
-                    <a class="card" href="./features/code/" data-reveal>
+                    <a class="card" href="../features/code/" data-reveal>
                 <span class="card__kicker">Docs</span>
                 <span class="card__title">Code</span>
-                <span class="card__text">Fenced code blocks with language classes, ready for a highlight plugin, with a copy button bolted on in ~15 lines of JS.</span>
+                <span class="card__text">Fenced code blocks with language classes, a highlight plugin hook, and a copy button in ~20 lines of JS.</span>
                 <span class="card__more">Open →</span>
             </a>
-                    <a class="card" href="./features/data/" data-reveal>
+                    <a class="card" href="../features/data/" data-reveal>
                 <span class="card__kicker">Content</span>
                 <span class="card__title">Data files</span>
-                <span class="card__text">Point a PHPDOC annotation at a YAML or JSON file and get structured data — or fetch it over the network at build time.</span>
+                <span class="card__text">Point a PHPDOC annotation at a YAML or JSON file and get structured data back.</span>
                 <span class="card__more">Open →</span>
             </a>
-                    <a class="card" href="./features/tags/" data-reveal>
+                    <a class="card" href="../features/tags/" data-reveal>
                 <span class="card__kicker">Extend</span>
-                <span class="card__title">Tags & hooks</span>
-                <span class="card__text">Register your own HTML tags, Markdown shortcodes and render-pipeline hooks from a single includes file.</span>
+                <span class="card__title">Tags &amp; hooks</span>
+                <span class="card__text">Register your own HTML tags, Markdown shortcodes and render hooks from one includes file.</span>
                 <span class="card__more">Open →</span>
             </a>
             </div>
-</section>
-
-<section class="section wrap">
-    <div class="section__head">
-        <p class="eyebrow">The whole build</p>
-        <h2 class="section__title">One config file, one command</h2>
-    </div>
-    <div class="prose">
-
-<pre><code class="language-yaml"># kirigami.yaml
-kirigami:
-  project: Kirigami Demo
-  baseurl: https://php-kirigami.github.io/template-demo
-  root:    src
-
-prepros:
-  before:   _layout/header.php
-  after:    _layout/footer.php
-  includes: [_lib/functions.php]
-
-tasks:
-  - { name: js-core,  type: esbuild, entry: scripts/kirigami.core.js }
-  - { name: css-core, type: sass,    entry: styles/kirigami.core.scss }</code></pre>
-<pre><code class="language-console">$ npx kiri build      # dev build — every task once
-$ npx kiri watch      # rebuild on change (no server)
-$ npx kiri export     # production build into dist/</code></pre>
-<span class="badge badge--accent">Zero deps</span> <span class="badge badge--ok">No PHP install</span> <span class="badge badge--muted">No headless browser</span>
-
-    </div>
 </section>
     </main>
 
@@ -163,7 +118,7 @@ $ npx kiri export     # production build into dist/</code></pre>
         <div class="wrap">
             <div class="site-footer__grid">
                 <div class="site-footer__col">
-                    <a class="brand" href="./">
+                    <a class="brand" href="../">
                         <span class="brand__mark" aria-hidden="true"></span>
                         Kirigami Demo                    </a>
                     <p style="margin-top:.6rem;max-width:24ch;color:var(--ink-muted)">
@@ -173,9 +128,9 @@ $ npx kiri export     # production build into dist/</code></pre>
                 <div class="site-footer__col">
                     <h3>Pages</h3>
                     <ul>
-                        <li><a href="./">Home</a></li>
-                        <li><a href="./features/">Features</a></li>
-                        <li><a href="./about/">About</a></li>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../features/">Features</a></li>
+                        <li><a href="../about/">About</a></li>
                     </ul>
                 </div>
 
@@ -184,7 +139,7 @@ $ npx kiri export     # production build into dist/</code></pre>
                     <ul>
                         <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                         <li><a href="https://github.com/php-kirigami/kiribuild">Deploy action</a></li>
-                        <li><a href="./sitemap.xml">Sitemap</a></li>
+                        <li><a href="../sitemap.xml">Sitemap</a></li>
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,7 @@
+// Entry compiled by the `css-core` sass task → styles/kirigami.core.min.css
+//
+// `partials/conf` must come first: it forwards @kirigami/canva/conf, which emits
+// the @font-face rules, the :root custom properties and the base reset.
 
 @use "partials/conf";
 @use "partials/main";
-
-
-
-

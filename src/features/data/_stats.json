@@ -1,0 +1,9 @@
+{
+  "runtime": "PHP 8.5",
+  "metrics": [
+    { "label": "Runtime dependencies", "value": "0" },
+    { "label": "Config files", "value": "1" },
+    { "label": "Build output", "value": "static HTML" },
+    { "label": "Server processes", "value": "none" }
+  ]
+}

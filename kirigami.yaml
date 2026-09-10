@@ -1,34 +1,44 @@
+# yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json
+
 kirigami:
-  project:     Kirigami Demo Template
-  baseurl:     https://php-kirigami.github.io/template-demo/
-  banner:      banner.txt
+  project:     Kirigami Demo
+  baseurl:     https://php-kirigami.github.io/template-demo
   root:        src
+  banner:      banner.txt
+
+  # Free-form project data — available as PHP variables on every page.
+  author:      The Kirigami Team
+  email:       hello@example.com
+  description: >-
+    A guided tour of Kirigami — the zero-dependency static site generator that
+    compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.
+  keywords:    [static site generator, php, webassembly, kirigami, zero dependency]
+  tagline:     Fold PHP into flat HTML.
 
 
-image: # image autogenerator
-  # format: avif # image format webp|avif (default: webp)
-  source: assets/images # folder source relative to cwd(); (default: assets/images)
-  dest: images #folder destination relative to config kirigami:root (default: images)
+image:
+  format: webp          # avif currently fails to encode at many sizes in the WASM build
+  source: assets/images
+  dest:   images
 
 
 prepros:
-  network: true
-  format: true
-  before: _layouts/header.php
-  after: _layouts/footer.php
+  network:  true
+  format:   false        # HTML::format() collapses whitespace inside <pre> — off until fixed
+  before:   _layout/header.php
+  after:    _layout/footer.php
+  includes: [_lib/functions.php]
 
 
-plugins:
-  - name: "@kirigami/plugin-highlight"
-    active: true
-    options:
-      style: canva
-      color: black
+# plugins:
+#   # @kirigami/plugin-highlight is not published yet — re-enable once it is.
+#   - name: "@kirigami/plugin-highlight"
+#     active: true
+#     options: { style: canva, color: black }
 
 
 sass:
   style: expanded
-
 
 
 tasks:

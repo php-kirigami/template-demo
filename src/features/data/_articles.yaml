@@ -1,0 +1,17 @@
+# Loaded by `@articles _articles.yaml` on _index.php.
+# A YAML sequence becomes an array of stdClass — no parser to install.
+
+- title:  Compiling PHP to static HTML
+  date:   2026-02-11
+  url:    https://github.com/php-kirigami/kirigami
+  blurb:  How the render pipeline turns a _page.php into a flat .html file.
+
+- title:  PHP 8.5 in the browser sandbox
+  date:   2026-04-03
+  url:    https://github.com/php-kirigami/kirigami/tree/main/packages/php-wasm
+  blurb:  Running a full standard library in WebAssembly, no server process.
+
+- title:  The image autogenerator
+  date:   2026-06-20
+  url:    https://github.com/php-kirigami/kirigami/tree/main/packages/php-prepros
+  blurb:  One engine, three call sites — Sass, PHP and the <img asset> tag.

@@ -1,3 +1,8 @@
 /node_modules/
 /dist/
 Thumbs.db
+
+# Kirigami working files (SQLite caches + cURL cookie jar)
+.cache.db
+.node.db
+.cookie.txt

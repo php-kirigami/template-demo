@@ -1,1 +1,3 @@
-KIRIKIRIKIRI
+Kirigami Demo
+Built with Kirigami — https://github.com/php-kirigami/kirigami
+MIT licensed. Generated file — do not edit.
