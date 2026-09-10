@@ -2,11 +2,16 @@
  * Bundled by the `js-core` esbuild task → scripts/kirigami.core.min.js
  *
  * Progressive enhancement only — the site is fully usable with JS disabled.
- * Kept dependency-free on purpose. `@kirigami/canva/theme` ships this exact
- * theme-toggle contract as an import (and `@kirigami/canva/observer` the
- * reveal-on-scroll one) — this starter inlines tiny equivalents instead.
  * The code-block copy button is handled by @kirigami/plugin-highlight.
  */
+
+// Theme toggle: wires every [data-theme-toggle] control (bare = flip, or
+// ="light|dark|auto"), persists under `kirigami-theme`, reflects the resolved
+// theme back onto the control, keeps it in sync with OS changes in auto mode,
+// and fires `canva:themechange` on window. The <head> has an inline FOUC guard
+// that reads the same key. `@kirigami/canva/observer` similarly ships the
+// reveal-on-scroll contract — this starter keeps a tiny equivalent inline.
+import "@kirigami/canva/theme";
 
 const documentReady = (fn) =>
     document.readyState === 'loading'
@@ -14,45 +19,6 @@ const documentReady = (fn) =>
         : fn();
 
 documentReady(() => {
-
-    /* ── Theme toggle ──────────────────────────────────────────────────
-       Mirrors @kirigami/canva/theme: persists under `kirigami-theme`, wires
-       any [data-theme-toggle] control (bare = flip, or ="light|dark|auto"),
-       reflects the resolved theme back onto it, and fires `canva:themechange`
-       on window. The <head> has an inline FOUC guard that reads the same key. */
-    const root = document.documentElement;
-    const media = matchMedia('(prefers-color-scheme: dark)');
-    const stored = () => { try { return localStorage.getItem('kirigami-theme') || 'auto'; } catch { return 'auto'; } };
-    const resolved = () => {
-        const a = root.dataset.theme;
-        return a === 'light' || a === 'dark' ? a : (media.matches ? 'dark' : 'light');
-    };
-
-    const sync = () => {
-        const theme = resolved();
-        document.querySelectorAll('[data-theme-toggle]').forEach((el) => {
-            el.dataset.themeState = theme;
-            el.setAttribute('aria-pressed', String(theme === 'dark'));
-        });
-        dispatchEvent(new CustomEvent('canva:themechange', { detail: { theme, preference: stored() } }));
-    };
-
-    const setPref = (pref) => {
-        const forced = pref === 'light' || pref === 'dark';
-        try { forced ? localStorage.setItem('kirigami-theme', pref) : localStorage.removeItem('kirigami-theme'); } catch {}
-        if (forced) root.dataset.theme = pref; else delete root.dataset.theme;
-        sync();
-    };
-
-    document.querySelectorAll('[data-theme-toggle]').forEach((el) => {
-        el.addEventListener('click', (e) => {
-            e.preventDefault();
-            const attr = el.getAttribute('data-theme-toggle');
-            setPref(['auto', 'light', 'dark'].includes(attr) ? attr : (resolved() === 'dark' ? 'light' : 'dark'));
-        });
-    });
-    media.addEventListener('change', () => { if (stored() === 'auto') sync(); });
-    sync();
 
     /* ── Mobile nav toggle ─────────────────────────────────────────── */
     const toggle = document.querySelector('.nav-toggle');
