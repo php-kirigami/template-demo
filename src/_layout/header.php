@@ -27,16 +27,6 @@ $nav = [
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        (function () {
-            var r = document.documentElement;
-            r.classList.add('js');
-            try {
-                var t = localStorage.getItem('kirigami-theme');
-                if (t === 'dark' || t === 'light') r.dataset.theme = t;
-            } catch (e) {}
-        })();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,8 +42,8 @@ $nav = [
     <meta property="og:url" content="<?php echo str_htmlesc($canonical); ?>">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="<?php echo $relroot; ?>styles/kirigami.core.min.css?###TIMESTAMP###">
-    <script defer src="<?php echo $relroot; ?>scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    <?php /* prepros.head injects the theme guard, the stylesheet <link> and the
+             bundle <script> (with the plugin-highlight copy button folded in). */ ?>
 </head>
 <body class="page-<?php echo str_htmlesc($section ?: 'home'); ?>">
     <a class="skip-link" href="#main">Skip to content</a>

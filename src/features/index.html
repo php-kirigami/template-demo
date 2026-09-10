@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script>
-            (function () {
-                var r = document.documentElement;
-                r.classList.add('js');
-                try {
-                    var t = localStorage.getItem('kirigami-theme');
-                    if (t === 'dark' || t === 'light') r.dataset.theme = t;
-                } catch (e) {}
-            })();
-        </script>
         <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../styles/kirigami.core.min.css?1789071306">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Features — Kirigami Demo</title>
         <meta name="description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
@@ -23,8 +17,6 @@
         <meta property="og:description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
         <meta property="og:url" content="https://php-kirigami.github.io/template-demo/features/">
         <meta name="twitter:card" content="summary_large_image">
-        <link rel="stylesheet" href="../styles/kirigami.core.min.css?1789063644">
-        <script defer src="../scripts/kirigami.core.min.js?1789063644"></script>
     </head>
     <body class="page-features">
         <a class="skip-link" href="#main">Skip to content</a>
@@ -127,5 +119,9 @@
                 </div>
             </div>
         </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../scripts/kirigami.core.min.js?1789071306"></script>
     </body>
 </html>
