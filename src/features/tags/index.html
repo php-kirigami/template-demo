@@ -110,21 +110,28 @@
                             <span class="extlink__site">GitHub</span>
                         </span>
                     </a>
-                    <h3 id="a-markdown-shortcode">A Markdown shortcode</h3>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-title function_ invoke__">md_register_plugin</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, fn(<span class="hljs-variable">$args</span>, <span class="hljs-variable">$body</span>) =&gt; <span class="hljs-title function_ invoke__">sprintf</span>(
-                            <span class="hljs-string">&#x27;&lt;span class=&quot;badge badge--%s&quot;&gt;%s&lt;/span&gt;&#x27;</span>,
-                            <span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>], <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$args</span>, <span class="hljs-number">1</span>)))
-                        ));
-                    </code></pre>
-                    <p>A bare call renders inline — <span class="badge badge--accent">Live</span> — anywhere Markdown is parsed.</p>
-                    <h3 id="a-render-hook">A render hook</h3>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-variable">$token</span> = <span class="hljs-string">&#x27;{{&#x27;</span> . <span class="hljs-string">&#x27;build-date}}&#x27;</span>;
-                        <span class="hljs-title function_ invoke__">register_hook</span>(<span class="hljs-string">&#x27;post_render&#x27;</span>, fn(<span class="hljs-variable">$html</span>) =&gt;
-                            <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-variable">$token</span>, <span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&#x27;F j, Y&#x27;</span>), <span class="hljs-variable">$html</span>));
-                    </code></pre>
-                    <p>This hook rewrites a placeholder token on the assembled HTML — look at the &quot;last updated …&quot; line at the bottom of every page.</p>
+                    <h3 id="a-tag-resolved-in-the-browser-not-at-build-time">A tag resolved in the browser, not at build time</h3>
+                    <p><a href="https://www.npmjs.com/package/@kirigami/plugin-embed" target="_blank" rel="noopener noreferrer"><code>@kirigami/plugin-embed</code></a> registers <code>&lt;youtube id=&quot;…&quot;&gt;</code> / <code>&lt;vimeo id=&quot;…&quot;&gt;</code> the same way again — but this one does nothing at build time. It ships a script (via <code>esbuild:after</code>) that swaps the tag for a placeholder on load, fetches the video&apos;s oEmbed data (thumbnail, title, real aspect-ratio) — cached in <code>localStorage</code>, so a repeat visit costs nothing — and wires a play button that loads the real player only once clicked:</p>
+                    <youtube id="jNQXAC9IVRw">
+                        <vimeo id="1084537">
+                            <p>Same tag mechanism, two different strategies: <code>&lt;extlink&gt;</code> resolves once, at build time, and commits the result; <code>&lt;youtube&gt;</code>/<code>&lt;vimeo&gt;</code> resolve every time, in the visitor&apos;s own browser. Neither is &quot;more correct&quot; — it depends on whether the data can change after the build and whether a network call at build time is acceptable.</p>
+                            <h3 id="a-markdown-shortcode">A Markdown shortcode</h3>
+                            <pre><code class="hljs language-php">
+                                <span class="hljs-title function_ invoke__">md_register_plugin</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, fn(<span class="hljs-variable">$args</span>, <span class="hljs-variable">$body</span>) =&gt; <span class="hljs-title function_ invoke__">sprintf</span>(
+                                    <span class="hljs-string">&#x27;&lt;span class=&quot;badge badge--%s&quot;&gt;%s&lt;/span&gt;&#x27;</span>,
+                                    <span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>], <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$args</span>, <span class="hljs-number">1</span>)))
+                                ));
+                            </code></pre>
+                            <p>A bare call renders inline — <span class="badge badge--accent">Live</span> — anywhere Markdown is parsed.</p>
+                            <h3 id="a-render-hook">A render hook</h3>
+                            <pre><code class="hljs language-php">
+                                <span class="hljs-variable">$token</span> = <span class="hljs-string">&#x27;{{&#x27;</span> . <span class="hljs-string">&#x27;build-date}}&#x27;</span>;
+                                <span class="hljs-title function_ invoke__">register_hook</span>(<span class="hljs-string">&#x27;post_render&#x27;</span>, fn(<span class="hljs-variable">$html</span>) =&gt;
+                                    <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-variable">$token</span>, <span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&#x27;F j, Y&#x27;</span>), <span class="hljs-variable">$html</span>));
+                            </code></pre>
+                            <p>This hook rewrites a placeholder token on the assembled HTML — look at the &quot;last updated …&quot; line at the bottom of every page.</p>
+                        </vimeo>
+                    </youtube>
                 </div>
             </section>
         </main>

@@ -54,6 +54,28 @@
         <extlink src="https://github.com/php-kirigami/kirigami">
 
         <markdown>
+        ### A tag resolved in the browser, not at build time
+
+        [`@kirigami/plugin-embed`](https://www.npmjs.com/package/@kirigami/plugin-embed)
+        registers `<youtube id="…">` / `<vimeo id="…">` the same way again —
+        but this one does nothing at build time. It ships a script (via
+        `esbuild:after`) that swaps the tag for a placeholder on load, fetches
+        the video's oEmbed data (thumbnail, title, real aspect-ratio) —
+        cached in `localStorage`, so a repeat visit costs nothing — and wires
+        a play button that loads the real player only once clicked:
+        </markdown>
+
+        <youtube id="jNQXAC9IVRw">
+
+        <vimeo id="1084537">
+
+        <markdown>
+        Same tag mechanism, two different strategies: `<extlink>` resolves
+        once, at build time, and commits the result; `<youtube>`/`<vimeo>`
+        resolve every time, in the visitor's own browser. Neither is "more
+        correct" — it depends on whether the data can change after the build
+        and whether a network call at build time is acceptable.
+
         ### A Markdown shortcode
 
         ```php

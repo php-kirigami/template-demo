@@ -60,6 +60,13 @@ plugins:
   - name: "@kirigami/plugin-extlink"
     active: true
 
+  # <youtube id="…"> / <vimeo id="…"> — oEmbed video cards, entirely
+  # client-side (no build-time network call). The observer script bundled
+  # into `js-core` fetches the oEmbed data on load (localStorage-cached) and
+  # wires a click-to-play button.
+  - name: "@kirigami/plugin-embed"
+    active: true
+
 
 sass:
   style: expanded
