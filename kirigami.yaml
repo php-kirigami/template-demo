@@ -27,7 +27,9 @@ image:
 # Card, canonical, favicon and apple-touch-icon are derived from the `kirigami:`
 # keys above and each page's PHPDOC (@title, @description, @image, @robots, …).
 # Any tag _layout/header.php already writes by hand is detected and skipped.
-meta: {}
+# Nest a `jsonld:` sub-block here too for schema.org JSON-LD — its own
+# independent opt-in (see php-prepros' README).
+seo: {}
 
 
 prepros:
