@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@kirigami/canva": "^2.5.0",
-    "@kirigami/kirigami": "^1.5.0",
+    "@kirigami/kirigami": "^1.5.1",
     "@kirigami/plugin-extlink": "^0.1.0",
     "@kirigami/plugin-highlight": "^0.1.3"
   }
