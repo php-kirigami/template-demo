@@ -190,7 +190,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-block: calc(var(--prose-flow) * 1.6);
   background: var(--border);
 }
-.prose code, .prose kbd, .prose samp, .prose pre {
+.prose code:not(.hljs), .prose kbd, .prose samp, .prose pre {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   font-size: 0.9em;
 }
@@ -207,7 +207,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.5;
   overflow-x: auto;
 }
-.prose pre code {
+.prose pre code:not(.hljs) {
   padding: 0;
   background: none;
   box-shadow: none;
@@ -993,7 +993,7 @@ a {
   margin-block: calc(var(--prose-flow) * 1.6);
   background: var(--border);
 }
-.page-about #main code, .page-about #main kbd, .page-about #main samp, .page-about #main pre {
+.page-about #main code:not(.hljs), .page-about #main kbd, .page-about #main samp, .page-about #main pre {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   font-size: 0.9em;
 }
@@ -1010,7 +1010,7 @@ a {
   line-height: 1.5;
   overflow-x: auto;
 }
-.page-about #main pre code {
+.page-about #main pre code:not(.hljs) {
   padding: 0;
   background: none;
   box-shadow: none;
