@@ -41,6 +41,19 @@
         <swatches asset="cover.jpg" count="5"></swatches>
 
         <markdown>
+        ### A tag from a plugin
+
+        Tags don't have to be hand-rolled — [`@kirigami/plugin-extlink`](https://www.npmjs.com/package/@kirigami/plugin-extlink)
+        registers `<extlink src="…">` the exact same way, via `prepros:php`. It
+        scrapes the target page for its title, description, preview image and
+        site name, and caches all of it to disk (`_data/extlink/`,
+        `assets/images/extlink/`) so a later build never re-crawls a URL it
+        has already resolved:
+        </markdown>
+
+        <extlink src="https://github.com/php-kirigami/kirigami">
+
+        <markdown>
         ### A Markdown shortcode
 
         ```php

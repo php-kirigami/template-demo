@@ -40,10 +40,10 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Switch between light and dark">
-                    <svg class="theme-toggle__moon" viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg class="theme-toggle__moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                     </svg>
-                    <svg class="theme-toggle__sun" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <svg class="theme-toggle__sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                         <circle cx="12" cy="12" r="4"></circle>
                         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
                     </svg>
@@ -109,23 +109,27 @@
                     <h2 class="section__title">One config file, one command</h2>
                 </div>
                 <div class="prose">
-                    <pre><code class="hljs language-yaml"><span class="hljs-comment"># kirigami.yaml</span>
-<span class="hljs-attr">kirigami:</span>
-  <span class="hljs-attr">project:</span> <span class="hljs-string">Kirigami</span> <span class="hljs-string">Demo</span>
-  <span class="hljs-attr">baseurl:</span> <span class="hljs-string">https://php-kirigami.github.io/template-demo</span>
-  <span class="hljs-attr">root:</span>    <span class="hljs-string">src</span>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-comment"># kirigami.yaml</span>
+                        <span class="hljs-attr">kirigami:</span>
+                          <span class="hljs-attr">project:</span> <span class="hljs-string">Kirigami</span> <span class="hljs-string">Demo</span>
+                          <span class="hljs-attr">baseurl:</span> <span class="hljs-string">https://php-kirigami.github.io/template-demo</span>
+                          <span class="hljs-attr">root:</span>    <span class="hljs-string">src</span>
 
-<span class="hljs-attr">prepros:</span>
-  <span class="hljs-attr">before:</span>   <span class="hljs-string">_layout/header.php</span>
-  <span class="hljs-attr">after:</span>    <span class="hljs-string">_layout/footer.php</span>
-  <span class="hljs-attr">includes:</span> [<span class="hljs-string">_lib/functions.php</span>]
+                        <span class="hljs-attr">prepros:</span>
+                          <span class="hljs-attr">before:</span>   <span class="hljs-string">_layout/header.php</span>
+                          <span class="hljs-attr">after:</span>    <span class="hljs-string">_layout/footer.php</span>
+                          <span class="hljs-attr">includes:</span> [<span class="hljs-string">_lib/functions.php</span>]
 
-<span class="hljs-attr">tasks:</span>
-  <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">js-core</span>,  <span class="hljs-attr">type:</span> <span class="hljs-string">esbuild</span>, <span class="hljs-attr">entry:</span> <span class="hljs-string">scripts/kirigami.core.js</span> }
-  <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">css-core</span>, <span class="hljs-attr">type:</span> <span class="hljs-string">sass</span>,    <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span> }</code></pre>
-                    <pre><code class="hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri build      <span class="hljs-comment"># dev build — every task once</span></span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri watch      <span class="hljs-comment"># rebuild on change (no server)</span></span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment"># production build into dist/</span></span></code></pre>
+                        <span class="hljs-attr">tasks:</span>
+                          <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">js-core</span>,  <span class="hljs-attr">type:</span> <span class="hljs-string">esbuild</span>, <span class="hljs-attr">entry:</span> <span class="hljs-string">scripts/kirigami.core.js</span> }
+                          <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">css-core</span>, <span class="hljs-attr">type:</span> <span class="hljs-string">sass</span>,    <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span> }
+                    </code></pre>
+                    <pre><code class="hljs language-shell">
+                        <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri build      <span class="hljs-comment"># dev build — every task once</span></span>
+                        <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri watch      <span class="hljs-comment"># rebuild on change (no server)</span></span>
+                        <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment"># production build into dist/</span></span>
+                    </code></pre>
                     <span class="badge badge--accent">Zero deps</span>
                     <span class="badge badge--ok">No PHP install</span>
                     <span class="badge badge--muted">No headless browser</span>
@@ -158,12 +162,12 @@
                 </div>
                 <div class="site-footer__bottom">
                     <span>© 2026 The Kirigami Team. MIT licensed.</span>
-                    <span>Built with Kirigami · last updated September 10, 2026</span>
+                    <span>Built with Kirigami · last updated September 11, 2026</span>
                 </div>
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="./scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

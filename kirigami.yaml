@@ -53,6 +53,13 @@ plugins:
       copyButton: true   # needs an esbuild task — we have `js-core` below
       tag: true
 
+  # <extlink src="…"> — a SCRAPER-backed external link preview card. Scrape
+  # result + downloaded thumbnail are cached to disk (_data/extlink/,
+  # assets/images/extlink/) and committed, so a rebuild never re-crawls a URL
+  # it has already resolved. Needs `prepros.network: true` above.
+  - name: "@kirigami/plugin-extlink"
+    active: true
+
 
 sass:
   style: expanded

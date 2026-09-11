@@ -40,10 +40,10 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Switch between light and dark">
-                    <svg class="theme-toggle__moon" viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg class="theme-toggle__moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                     </svg>
-                    <svg class="theme-toggle__sun" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <svg class="theme-toggle__sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                         <circle cx="12" cy="12" r="4"></circle>
                         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
                     </svg>
@@ -68,13 +68,15 @@
                 <div class="prose">
                     <p><code>prepros.includes: [_lib/functions.php]</code> runs one file before any page renders. This site uses it for all three extension points.</p>
                     <h3 id="a-custom-tag">A custom tag</h3>
-                    <pre><code class="hljs language-php"><span class="hljs-title function_ invoke__">register_tag</span>(<span class="hljs-string">&#x27;swatches&#x27;</span>, function (<span class="hljs-variable">$tag</span>, <span class="hljs-variable">$attrs</span>, <span class="hljs-variable">$body</span>) {
-    <span class="hljs-variable">$chips</span> = <span class="hljs-string">&#x27;&#x27;</span>;
-    <span class="hljs-keyword">foreach</span> (<span class="hljs-title function_ invoke__">img_palette</span>(<span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;asset&#x27;</span>], (<span class="hljs-keyword">int</span>) <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;count&#x27;</span>]) <span class="hljs-keyword">as</span> <span class="hljs-variable">$hex</span>) {
-        <span class="hljs-variable">$chips</span> .= <span class="hljs-string">&quot;&lt;li style=\&quot;--chip:<span class="hljs-subst">$hex</span>\&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;<span class="hljs-subst">$hex</span>&lt;/code&gt;&lt;/li&gt;&quot;</span>;
-    }
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&lt;ul class=\&quot;swatches\&quot;&gt;<span class="hljs-subst">$chips</span>&lt;/ul&gt;&quot;</span>;
-});</code></pre>
+                    <pre><code class="hljs language-php">
+                        <span class="hljs-title function_ invoke__">register_tag</span>(<span class="hljs-string">&#x27;swatches&#x27;</span>, function (<span class="hljs-variable">$tag</span>, <span class="hljs-variable">$attrs</span>, <span class="hljs-variable">$body</span>) {
+                            <span class="hljs-variable">$chips</span> = <span class="hljs-string">&#x27;&#x27;</span>;
+                            <span class="hljs-keyword">foreach</span> (<span class="hljs-title function_ invoke__">img_palette</span>(<span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;asset&#x27;</span>], (<span class="hljs-keyword">int</span>) <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;count&#x27;</span>]) <span class="hljs-keyword">as</span> <span class="hljs-variable">$hex</span>) {
+                                <span class="hljs-variable">$chips</span> .= <span class="hljs-string">&quot;&lt;li style=\&quot;--chip:<span class="hljs-subst">$hex</span>\&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;<span class="hljs-subst">$hex</span>&lt;/code&gt;&lt;/li&gt;&quot;</span>;
+                            }
+                            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&lt;ul class=\&quot;swatches\&quot;&gt;<span class="hljs-subst">$chips</span>&lt;/ul&gt;&quot;</span>;
+                        });
+                    </code></pre>
                     <p>Used as <code>&lt;swatches asset=&quot;cover.jpg&quot; count=&quot;5&quot;&gt;</code>, it renders:</p>
                     <ul class="swatches" role="list">
                         <li style="--chip:#575563">
@@ -98,16 +100,30 @@
                             <code>#331714</code>
                         </li>
                     </ul>
+                    <h3 id="a-tag-from-a-plugin">A tag from a plugin</h3>
+                    <p>Tags don&apos;t have to be hand-rolled — <a href="https://www.npmjs.com/package/@kirigami/plugin-extlink" target="_blank" rel="noopener noreferrer"><code>@kirigami/plugin-extlink</code></a> registers <code>&lt;extlink src=&quot;…&quot;&gt;</code> the exact same way, via <code>prepros:php</code>. It scrapes the target page for its title, description, preview image and site name, and caches all of it to disk (<code>_data/extlink/</code>, <code>assets/images/extlink/</code>) so a later build never re-crawls a URL it has already resolved:</p>
+                    <a class="extlink" href="https://github.com/php-kirigami/kirigami" target="_blank" rel="noopener noreferrer">
+                        <img class="extlink__image" src="../../images/extlink/9dc4c4459f96.webp" alt="" loading="lazy">
+                        <span class="extlink__body">
+                            <strong class="extlink__title">php-kirigami/kirigami: Core package</strong>
+                            <span class="extlink__desc">Core package. Contribute to php-kirigami/kirigami development by creating an account on GitHub.</span>
+                            <span class="extlink__site">GitHub</span>
+                        </span>
+                    </a>
                     <h3 id="a-markdown-shortcode">A Markdown shortcode</h3>
-                    <pre><code class="hljs language-php"><span class="hljs-title function_ invoke__">md_register_plugin</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, fn(<span class="hljs-variable">$args</span>, <span class="hljs-variable">$body</span>) =&gt; <span class="hljs-title function_ invoke__">sprintf</span>(
-    <span class="hljs-string">&#x27;&lt;span class=&quot;badge badge--%s&quot;&gt;%s&lt;/span&gt;&#x27;</span>,
-    <span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>], <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$args</span>, <span class="hljs-number">1</span>)))
-));</code></pre>
+                    <pre><code class="hljs language-php">
+                        <span class="hljs-title function_ invoke__">md_register_plugin</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, fn(<span class="hljs-variable">$args</span>, <span class="hljs-variable">$body</span>) =&gt; <span class="hljs-title function_ invoke__">sprintf</span>(
+                            <span class="hljs-string">&#x27;&lt;span class=&quot;badge badge--%s&quot;&gt;%s&lt;/span&gt;&#x27;</span>,
+                            <span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>], <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$args</span>, <span class="hljs-number">1</span>)))
+                        ));
+                    </code></pre>
                     <p>A bare call renders inline — <span class="badge badge--accent">Live</span> — anywhere Markdown is parsed.</p>
                     <h3 id="a-render-hook">A render hook</h3>
-                    <pre><code class="hljs language-php"><span class="hljs-variable">$token</span> = <span class="hljs-string">&#x27;{{&#x27;</span> . <span class="hljs-string">&#x27;build-date}}&#x27;</span>;
-<span class="hljs-title function_ invoke__">register_hook</span>(<span class="hljs-string">&#x27;post_render&#x27;</span>, fn(<span class="hljs-variable">$html</span>) =&gt;
-    <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-variable">$token</span>, <span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&#x27;F j, Y&#x27;</span>), <span class="hljs-variable">$html</span>));</code></pre>
+                    <pre><code class="hljs language-php">
+                        <span class="hljs-variable">$token</span> = <span class="hljs-string">&#x27;{{&#x27;</span> . <span class="hljs-string">&#x27;build-date}}&#x27;</span>;
+                        <span class="hljs-title function_ invoke__">register_hook</span>(<span class="hljs-string">&#x27;post_render&#x27;</span>, fn(<span class="hljs-variable">$html</span>) =&gt;
+                            <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-variable">$token</span>, <span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&#x27;F j, Y&#x27;</span>), <span class="hljs-variable">$html</span>));
+                    </code></pre>
                     <p>This hook rewrites a placeholder token on the assembled HTML — look at the &quot;last updated …&quot; line at the bottom of every page.</p>
                 </div>
             </section>
@@ -138,12 +154,12 @@
                 </div>
                 <div class="site-footer__bottom">
                     <span>© 2026 The Kirigami Team. MIT licensed.</span>
-                    <span>Built with Kirigami · last updated September 10, 2026</span>
+                    <span>Built with Kirigami · last updated September 11, 2026</span>
                 </div>
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

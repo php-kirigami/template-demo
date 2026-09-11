@@ -40,10 +40,10 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Switch between light and dark">
-                    <svg class="theme-toggle__moon" viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg class="theme-toggle__moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                     </svg>
-                    <svg class="theme-toggle__sun" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <svg class="theme-toggle__sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                         <circle cx="12" cy="12" r="4"></circle>
                         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
                     </svg>
@@ -211,31 +211,39 @@
                         <hr>
                         <h2 id="installation">Installation</h2>
                         <p>Get the CLI via the <a href="./packages/kirigami"><code>@kirigami/kirigami</code></a> package:</p>
-                        <pre><code class="hljs language-bash">npm install -D @kirigami/kirigami</code></pre>
+                        <pre><code class="hljs language-bash">
+                            npm install -D @kirigami/kirigami
+                        </code></pre>
                         <p>That&apos;s it — the <code>kiri</code> command is ready to go (via <code>npx kiri</code> or an npm script).</p>
                         <hr>
                         <h2 id="quick-start">Quick start</h2>
                         <ol>
                             <li>Drop a <code>kirigami.yaml</code> at the root of your project:</li>
                         </ol>
-                        <pre><code class="hljs language-yaml"><span class="hljs-attr">kirigami:</span>
-  <span class="hljs-attr">project:</span> <span class="hljs-string">&quot;My Site&quot;</span>
-  <span class="hljs-attr">baseurl:</span> <span class="hljs-string">&quot;https://mysite.com&quot;</span>
-  <span class="hljs-attr">root:</span> <span class="hljs-string">&quot;src&quot;</span>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-attr">kirigami:</span>
+                              <span class="hljs-attr">project:</span> <span class="hljs-string">&quot;My Site&quot;</span>
+                              <span class="hljs-attr">baseurl:</span> <span class="hljs-string">&quot;https://mysite.com&quot;</span>
+                              <span class="hljs-attr">root:</span> <span class="hljs-string">&quot;src&quot;</span>
 
-<span class="hljs-attr">prepros:</span>
-  <span class="hljs-attr">before:</span> <span class="hljs-string">&quot;_layouts/header.php&quot;</span>
-  <span class="hljs-attr">after:</span> <span class="hljs-string">&quot;_layouts/footer.php&quot;</span>
-  <span class="hljs-attr">format:</span> <span class="hljs-literal">true</span></code></pre>
+                            <span class="hljs-attr">prepros:</span>
+                              <span class="hljs-attr">before:</span> <span class="hljs-string">&quot;_layouts/header.php&quot;</span>
+                              <span class="hljs-attr">after:</span> <span class="hljs-string">&quot;_layouts/footer.php&quot;</span>
+                              <span class="hljs-attr">format:</span> <span class="hljs-literal">true</span>
+                        </code></pre>
                         <ol>
                             <li>Write your <code>_*.php</code> pages inside the <code>src/</code> folder (or wherever <code>root</code> points).</li>
                             <li>Fire up dev mode and watch it come alive:</li>
                         </ol>
-                        <pre><code class="hljs language-bash">npx kiri watch</code></pre>
+                        <pre><code class="hljs language-bash">
+                            npx kiri watch
+                        </code></pre>
                         <ol>
                             <li>Ship it! Export the fully static site for production:</li>
                         </ol>
-                        <pre><code class="hljs language-bash">npx kiri <span class="hljs-built_in">export</span></code></pre>
+                        <pre><code class="hljs language-bash">
+                            npx kiri <span class="hljs-built_in">export</span>
+                        </code></pre>
                         <hr>
                         <h2 id="cli-commands">CLI commands</h2>
                         <table>
@@ -259,6 +267,10 @@
                                     <td>Starts dev mode: watches project files and rebuilds automatically on change.</td>
                                 </tr>
                                 <tr>
+                                    <td><code>kiri serve</code></td>
+                                    <td>Same as <code>kiri watch</code>, plus a local server and browser hot-reload (Server-Sent Events, no server framework).</td>
+                                </tr>
+                                <tr>
                                     <td><code>kiri run &lt;script&gt;</code></td>
                                     <td>Runs a PHP command script from the <code>scripts/</code> folder inside the Kirigami runtime.</td>
                                 </tr>
@@ -278,80 +290,84 @@
                         </table>
                         <p>Every command comes with its own detailed help: <code>kiri &lt;command&gt; --help</code>.</p>
                         <hr>
-                        <h2 id="configuration-ic46">Configuration (<code>kirigami.yaml</code>)</h2>
+                        <h2 id="configuration-ic48">Configuration (<code>kirigami.yaml</code>)</h2>
                         <p>The whole project is configured through a single <code>kirigami.yaml</code> file at the project root, validated against a <a href="./packages/kirigami/kirigami.schema.json">JSON schema</a>. Point your editor at it and enjoy full autocompletion:</p>
-                        <pre><code class="hljs language-yaml"><span class="hljs-comment"># yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json</span></code></pre>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-comment"># yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json</span>
+                        </code></pre>
                         <p>Here&apos;s a real-world example, showing most of the available sections:</p>
-                        <pre><code class="hljs language-yaml"><span class="hljs-attr">kirigami:</span>
-  <span class="hljs-attr">project:</span>     <span class="hljs-string">My</span> <span class="hljs-string">Website</span>
-  <span class="hljs-attr">baseurl:</span>     <span class="hljs-string">https://example.com</span>
-  <span class="hljs-attr">banner:</span>      <span class="hljs-string">assets/banner.txt</span>
-  <span class="hljs-attr">root:</span>        <span class="hljs-string">src</span>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-attr">kirigami:</span>
+                              <span class="hljs-attr">project:</span>     <span class="hljs-string">My</span> <span class="hljs-string">Website</span>
+                              <span class="hljs-attr">baseurl:</span>     <span class="hljs-string">https://example.com</span>
+                              <span class="hljs-attr">banner:</span>      <span class="hljs-string">assets/banner.txt</span>
+                              <span class="hljs-attr">root:</span>        <span class="hljs-string">src</span>
 
-  <span class="hljs-comment"># Any extra key becomes a PHP variable available in every template</span>
+                              <span class="hljs-comment"># Any extra key becomes a PHP variable available in every template</span>
 
-  <span class="hljs-attr">author:</span>      <span class="hljs-string">Jane</span> <span class="hljs-string">Doe</span>
-  <span class="hljs-attr">person:</span>      <span class="hljs-string">John</span> <span class="hljs-string">Smith</span>
-  <span class="hljs-attr">jobtitle:</span>    <span class="hljs-string">Founder</span>
-  <span class="hljs-attr">email:</span>       <span class="hljs-string">hello@example.com</span>
-  <span class="hljs-attr">facebook:</span>    <span class="hljs-string">https://www.facebook.com/example</span>
-  <span class="hljs-attr">area:</span>        <span class="hljs-string">Somewhere,</span> <span class="hljs-string">Country</span>
-  <span class="hljs-attr">gtag:</span>        <span class="hljs-string">G-XXXXXXXXXX</span>
+                              <span class="hljs-attr">author:</span>      <span class="hljs-string">Jane</span> <span class="hljs-string">Doe</span>
+                              <span class="hljs-attr">person:</span>      <span class="hljs-string">John</span> <span class="hljs-string">Smith</span>
+                              <span class="hljs-attr">jobtitle:</span>    <span class="hljs-string">Founder</span>
+                              <span class="hljs-attr">email:</span>       <span class="hljs-string">hello@example.com</span>
+                              <span class="hljs-attr">facebook:</span>    <span class="hljs-string">https://www.facebook.com/example</span>
+                              <span class="hljs-attr">area:</span>        <span class="hljs-string">Somewhere,</span> <span class="hljs-string">Country</span>
+                              <span class="hljs-attr">gtag:</span>        <span class="hljs-string">G-XXXXXXXXXX</span>
 
-  <span class="hljs-attr">description:</span> <span class="hljs-string">&gt;
-    A short description of the site, also exposed as $description.
-</span>
-  <span class="hljs-attr">knowsabout:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">Topic</span> <span class="hljs-string">one</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">Topic</span> <span class="hljs-string">two</span>
-  <span class="hljs-attr">keywords:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">keyword</span> <span class="hljs-string">one</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">keyword</span> <span class="hljs-string">two</span>
-
-
-<span class="hljs-attr">prepros:</span>
-  <span class="hljs-attr">format:</span> <span class="hljs-literal">true</span>
-  <span class="hljs-attr">network:</span> <span class="hljs-literal">true</span>
-  <span class="hljs-comment"># mountext: [&#x27;.webp&#x27;]</span>
-  <span class="hljs-attr">includes:</span> [<span class="hljs-string">_lib/functions.php</span>]
-  <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/header.php</span>
-  <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/footer.php</span>
+                              <span class="hljs-attr">description:</span> <span class="hljs-string">&gt;
+                                A short description of the site, also exposed as $description.
+                            </span>
+                              <span class="hljs-attr">knowsabout:</span>
+                                <span class="hljs-bullet">-</span> <span class="hljs-string">Topic</span> <span class="hljs-string">one</span>
+                                <span class="hljs-bullet">-</span> <span class="hljs-string">Topic</span> <span class="hljs-string">two</span>
+                              <span class="hljs-attr">keywords:</span>
+                                <span class="hljs-bullet">-</span> <span class="hljs-string">keyword</span> <span class="hljs-string">one</span>
+                                <span class="hljs-bullet">-</span> <span class="hljs-string">keyword</span> <span class="hljs-string">two</span>
 
 
-<span class="hljs-attr">image:</span>
-  <span class="hljs-comment"># format: avif        # webp | avif (default: webp)</span>
-  <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span>  <span class="hljs-comment"># relative to cwd()          (default: assets/images)</span>
-  <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span>         <span class="hljs-comment"># relative to kirigami.root  (default: images)</span>
+                            <span class="hljs-attr">prepros:</span>
+                              <span class="hljs-attr">format:</span> <span class="hljs-literal">true</span>
+                              <span class="hljs-attr">network:</span> <span class="hljs-literal">true</span>
+                              <span class="hljs-comment"># mountext: [&#x27;.webp&#x27;]</span>
+                              <span class="hljs-attr">includes:</span> [<span class="hljs-string">_lib/functions.php</span>]
+                              <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/header.php</span>
+                              <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/footer.php</span>
 
 
-<span class="hljs-attr">plugins:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span>
-    <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">options:</span> {}
+                            <span class="hljs-attr">image:</span>
+                              <span class="hljs-comment"># format: avif        # webp | avif (default: webp)</span>
+                              <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span>  <span class="hljs-comment"># relative to cwd()          (default: assets/images)</span>
+                              <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span>         <span class="hljs-comment"># relative to kirigami.root  (default: images)</span>
 
 
-<span class="hljs-attr">esbuild:</span>
-<span class="hljs-comment">#   minify: false</span>
-
-<span class="hljs-attr">sass:</span>
-<span class="hljs-comment">#   style: expanded</span>
-
-
-<span class="hljs-attr">scripts:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">convert-images-to-webp</span>
-    <span class="hljs-attr">mount:</span> [<span class="hljs-string">&quot;assets/images/**/*.jpg&quot;</span>]
-    <span class="hljs-attr">trigger:</span> <span class="hljs-string">before-build</span> <span class="hljs-comment"># before-build, before-export or after-export</span>
+                            <span class="hljs-attr">plugins:</span>
+                              <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span>
+                                <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span>
+                                <span class="hljs-attr">options:</span> {}
 
 
-<span class="hljs-attr">tasks:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span>  <span class="hljs-string">js-core</span>
-    <span class="hljs-attr">type:</span>  <span class="hljs-string">esbuild</span>
-    <span class="hljs-attr">entry:</span> <span class="hljs-string">scripts/kirigami.core.js</span>
+                            <span class="hljs-attr">esbuild:</span>
+                            <span class="hljs-comment">#   minify: false</span>
 
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span>  <span class="hljs-string">scss-core</span>
-    <span class="hljs-attr">type:</span>  <span class="hljs-string">sass</span>
-    <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span></code></pre>
-                        <h3 id="ic48-core-project-settings"><code>kirigami:</code> — core project settings</h3>
+                            <span class="hljs-attr">sass:</span>
+                            <span class="hljs-comment">#   style: expanded</span>
+
+
+                            <span class="hljs-attr">scripts:</span>
+                              <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">convert-images-to-webp</span>
+                                <span class="hljs-attr">mount:</span> [<span class="hljs-string">&quot;assets/images/**/*.jpg&quot;</span>]
+                                <span class="hljs-attr">trigger:</span> <span class="hljs-string">before-build</span> <span class="hljs-comment"># before-build, before-export or after-export</span>
+
+
+                            <span class="hljs-attr">tasks:</span>
+                              <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span>  <span class="hljs-string">js-core</span>
+                                <span class="hljs-attr">type:</span>  <span class="hljs-string">esbuild</span>
+                                <span class="hljs-attr">entry:</span> <span class="hljs-string">scripts/kirigami.core.js</span>
+
+                              <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span>  <span class="hljs-string">scss-core</span>
+                                <span class="hljs-attr">type:</span>  <span class="hljs-string">sass</span>
+                                <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span>
+                        </code></pre>
+                        <h3 id="ic50-core-project-settings"><code>kirigami:</code> — core project settings</h3>
                         <table>
                             <thead>
                                 <tr>
@@ -388,7 +404,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h3 id="ic68-the-php-html-compiler"><code>prepros:</code> — the PHP → HTML compiler</h3>
+                        <h3 id="ic70-the-php-html-compiler"><code>prepros:</code> — the PHP → HTML compiler</h3>
                         <p>Just declaring this block (even empty) automatically prepends a forced <code>prepros</code> task that renders every page and regenerates <code>sitemap.xml</code>.</p>
                         <table>
                             <thead>
@@ -424,7 +440,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h3 id="ic90-image-autogenerator"><code>image:</code> — image autogenerator</h3>
+                        <h3 id="ic92-image-autogenerator"><code>image:</code> — image autogenerator</h3>
                         <p>Options for the built-in image autogenerator. One feature, four entry points that share this config, one engine and the same output files: the <code>img-asset()</code> and <code>colors()</code> Sass functions, the PHP <code>IMG::asset()</code> / <code>IMG::palette()</code> helpers, and the <code>&lt;img asset=&quot;…&quot;&gt;</code> tag in page templates — all resize/encode through the <code>IMG</code> class (GD/Imagick) in the WASM runtime, so there is no native image dependency. Optional — the defaults below apply even when the block is absent.</p>
                         <table>
                             <thead>
@@ -448,7 +464,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h3 id="ic107-kirigami-plugins"><code>plugins:</code> — Kirigami plugins</h3>
+                        <h3 id="ic109-kirigami-plugins"><code>plugins:</code> — Kirigami plugins</h3>
                         <p>A list of plugins loaded through <a href="./packages/sdk"><code>@kirigami/sdk</code></a>. Each entry&apos;s package name must match <code>@kirigami/plugin-*</code>, <code>&lt;scope&gt;/kirigami-plugin-*</code>, or <code>kirigami-plugin-*</code>.</p>
                         <table>
                             <thead>
@@ -472,9 +488,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h3 id="ic115-ic116-global-build-options"><code>esbuild:</code> / <code>sass:</code> — global build options</h3>
+                        <h3 id="ic117-ic118-global-build-options"><code>esbuild:</code> / <code>sass:</code> — global build options</h3>
                         <p>Both are free-form objects passed straight through to the underlying build call, <em>after</em> Kirigami&apos;s own defaults (so they can override them): <code>esbuild:</code> maps to esbuild&apos;s own <a href="https://esbuild.github.io/api/#build-api" target="_blank" rel="noopener noreferrer"><code>BuildOptions</code></a>, <code>sass:</code> to Dart Sass&apos;s own <a href="https://sass-lang.com/documentation/js-api/interfaces/options/" target="_blank" rel="noopener noreferrer"><code>Options</code></a>. <code>sass:</code> also accepts <code>before</code> / <code>after</code> — arrays of extra <code>.scss</code> files compiled respectively before and after the entry (paths relative to <code>cwd()</code>). Leaving a block empty (as in the example above) is equivalent to omitting it entirely.</p>
-                        <h3 id="ic126-production-export-options"><code>export:</code> — production export options</h3>
+                        <h3 id="ic128-production-export-options"><code>export:</code> — production export options</h3>
                         <table>
                             <thead>
                                 <tr>
@@ -493,7 +509,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h3 id="ic131-named-php-scripts"><code>scripts:</code> — named PHP scripts</h3>
+                        <h3 id="ic133-named-php-scripts"><code>scripts:</code> — named PHP scripts</h3>
                         <p>Each entry maps to a PHP file at <code>scripts/&lt;name&gt;.php</code>, runnable manually with <code>kiri run &lt;name&gt; [args...]</code> or fired automatically at a pipeline checkpoint.</p>
                         <table>
                             <thead>
@@ -517,7 +533,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h3 id="ic145-the-build-pipeline"><code>tasks:</code> — the build pipeline</h3>
+                        <h3 id="ic147-the-build-pipeline"><code>tasks:</code> — the build pipeline</h3>
                         <p>An ordered list of build tasks, run in array order — on top of the implicit <code>prepros</code> task (added automatically whenever the <code>prepros</code> block is present) and the implicit <code>dist</code> task (added automatically during <code>kiri export</code>).</p>
                         <h2 id="table"></h2>
                         <table>
@@ -544,24 +560,26 @@
                         <h2 id="continuous-deployment">Continuous deployment</h2>
                         <p>Kirigami ships an official reusable GitHub Action, <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer"><code>php-kirigami/kiribuild</code></a>, to build and deploy your site straight from CI — typically to GitHub Pages, on every push. Set it up once, and every push to <code>main</code> ships a fresh, fully rebuilt site.</p>
                         <p>A minimal workflow looks like this:</p>
-                        <pre><code class="hljs language-yaml"><span class="hljs-comment"># .github/workflows/deploy.yml</span>
-<span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">Deploy</span>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-comment"># .github/workflows/deploy.yml</span>
+                            <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">Deploy</span>
 
-<span class="hljs-attr">on:</span>
-  <span class="hljs-attr">push:</span>
-    <span class="hljs-attr">branches:</span> [<span class="hljs-string">main</span>]
+                            <span class="hljs-attr">on:</span>
+                              <span class="hljs-attr">push:</span>
+                                <span class="hljs-attr">branches:</span> [<span class="hljs-string">main</span>]
 
-<span class="hljs-attr">permissions:</span>
-  <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span>
-  <span class="hljs-attr">pages:</span> <span class="hljs-string">write</span>
-  <span class="hljs-attr">id-token:</span> <span class="hljs-string">write</span>
+                            <span class="hljs-attr">permissions:</span>
+                              <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span>
+                              <span class="hljs-attr">pages:</span> <span class="hljs-string">write</span>
+                              <span class="hljs-attr">id-token:</span> <span class="hljs-string">write</span>
 
-<span class="hljs-attr">jobs:</span>
-  <span class="hljs-attr">deploy:</span>
-    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
-    <span class="hljs-attr">steps:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">php-kirigami/kiribuild@v1</span></code></pre>
+                            <span class="hljs-attr">jobs:</span>
+                              <span class="hljs-attr">deploy:</span>
+                                <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
+                                <span class="hljs-attr">steps:</span>
+                                  <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span>
+                                  <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">php-kirigami/kiribuild@v1</span>
+                        </code></pre>
                         <p>Check the <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer">action&apos;s own documentation</a> for the full list of inputs (export path, GitHub Pages deployment options, etc.).</p>
                         <hr>
                         <h2 id="license">License</h2>
@@ -599,12 +617,12 @@
                 </div>
                 <div class="site-footer__bottom">
                     <span>© 2026 The Kirigami Team. MIT licensed.</span>
-                    <span>Built with Kirigami · last updated September 10, 2026</span>
+                    <span>Built with Kirigami · last updated September 11, 2026</span>
                 </div>
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

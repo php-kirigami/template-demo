@@ -40,10 +40,10 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Switch between light and dark">
-                    <svg class="theme-toggle__moon" viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg class="theme-toggle__moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                     </svg>
-                    <svg class="theme-toggle__sun" viewbox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <svg class="theme-toggle__sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                         <circle cx="12" cy="12" r="4"></circle>
                         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
                     </svg>
@@ -67,29 +67,37 @@
                 </div>
                 <div class="prose">
                     <p>Fenced blocks become <code>&lt;pre&gt;&lt;code class=&quot;language-…&quot;&gt;</code>. This site lists <code>@kirigami/plugin-highlight</code> under <code>plugins:</code>, so its <code>prepros:html</code> hook runs highlight.js over every block <strong>at build time</strong> — the <code>.hljs-*</code> spans you see below are baked into the HTML. Drop the plugin and you still get the bare language class to style yourself. Either way there is <strong>no client-side highlighter shipped</strong>.</p>
-                    <pre><code class="hljs language-php"><span class="hljs-comment">// _lib/functions.php — a custom tag in ~5 lines</span>
-<span class="hljs-title function_ invoke__">register_tag</span>(<span class="hljs-string">&#x27;swatches&#x27;</span>, function (<span class="hljs-variable">$tag</span>, <span class="hljs-variable">$attrs</span>, <span class="hljs-variable">$body</span>) {
-    <span class="hljs-variable">$chips</span> = <span class="hljs-string">&#x27;&#x27;</span>;
-    <span class="hljs-keyword">foreach</span> (<span class="hljs-title function_ invoke__">img_palette</span>(<span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;asset&#x27;</span>], <span class="hljs-number">6</span>) <span class="hljs-keyword">as</span> <span class="hljs-variable">$hex</span>) {
-        <span class="hljs-variable">$chips</span> .= <span class="hljs-string">&quot;&lt;li style=\&quot;--chip:<span class="hljs-subst">$hex</span>\&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;&quot;</span>;
-    }
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&lt;ul class=\&quot;swatches\&quot;&gt;<span class="hljs-subst">$chips</span>&lt;/ul&gt;&quot;</span>;
-});</code></pre>
-                    <pre><code class="hljs language-scss"><span class="hljs-selector-class">.card</span> {
-    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--surface-<span class="hljs-number">2</span>);
-    <span class="hljs-attribute">box-shadow</span>: <span class="hljs-built_in">var</span>(--shadow);
-    &amp;<span class="hljs-selector-pseudo">:hover</span> { <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">4px</span>); }
-}</code></pre>
-                    <pre><code class="hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri watch</span>
-[css-core] batch 1 styles/kirigami.core.scss
-✔ Build finished</code></pre>
+                    <pre><code class="hljs language-php">
+                        <span class="hljs-comment">// _lib/functions.php — a custom tag in ~5 lines</span>
+                        <span class="hljs-title function_ invoke__">register_tag</span>(<span class="hljs-string">&#x27;swatches&#x27;</span>, function (<span class="hljs-variable">$tag</span>, <span class="hljs-variable">$attrs</span>, <span class="hljs-variable">$body</span>) {
+                            <span class="hljs-variable">$chips</span> = <span class="hljs-string">&#x27;&#x27;</span>;
+                            <span class="hljs-keyword">foreach</span> (<span class="hljs-title function_ invoke__">img_palette</span>(<span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;asset&#x27;</span>], <span class="hljs-number">6</span>) <span class="hljs-keyword">as</span> <span class="hljs-variable">$hex</span>) {
+                                <span class="hljs-variable">$chips</span> .= <span class="hljs-string">&quot;&lt;li style=\&quot;--chip:<span class="hljs-subst">$hex</span>\&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;&quot;</span>;
+                            }
+                            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&lt;ul class=\&quot;swatches\&quot;&gt;<span class="hljs-subst">$chips</span>&lt;/ul&gt;&quot;</span>;
+                        });
+                    </code></pre>
+                    <pre><code class="hljs language-scss">
+                        <span class="hljs-selector-class">.card</span> {
+                            <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--surface-<span class="hljs-number">2</span>);
+                            <span class="hljs-attribute">box-shadow</span>: <span class="hljs-built_in">var</span>(--shadow);
+                            &amp;<span class="hljs-selector-pseudo">:hover</span> { <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">4px</span>); }
+                        }
+                    </code></pre>
+                    <pre><code class="hljs language-shell">
+                        <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri watch</span>
+                        [css-core] batch 1 styles/kirigami.core.scss
+                        ✔ Build finished
+                    </code></pre>
                     <p>The hover <strong>Copy</strong> button on every block comes from the plugin&apos;s <code>copyButton</code> option — a ~1 KB script folded into the <code>js-core</code> bundle via the <code>esbuild:after</code> hook, its styles via <code>sass:after</code>.</p>
                     <p>Prefer an explicit tag to a fence? <code>plugin-highlight</code> also registers a <code>&lt;highlight lang=&quot;…&quot;&gt;</code> tag (PHP side, <code>prepros:php</code> hook) that normalises to the same markup:</p>
-                    <pre><code class="hljs language-php"><span class="hljs-meta">#[Route</span>(<span class="hljs-string">&#x27;/feed.xml&#x27;</span>)<span class="hljs-meta">]</span>
-<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">feed</span>(<span class="hljs-params">Repository <span class="hljs-variable">$posts</span></span>): <span class="hljs-title">Response</span>
-</span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">render</span>(<span class="hljs-string">&#x27;feed.xml.twig&#x27;</span>, [<span class="hljs-string">&#x27;posts&#x27;</span> =&gt; <span class="hljs-variable">$posts</span>-&gt;<span class="hljs-title function_ invoke__">latest</span>(<span class="hljs-number">20</span>)]);
-}</code></pre>
+                    <pre><code class="hljs language-php">
+                        <span class="hljs-meta">#[Route</span>(<span class="hljs-string">&#x27;/feed.xml&#x27;</span>)<span class="hljs-meta">]</span>
+                        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">feed</span>(<span class="hljs-params">Repository <span class="hljs-variable">$posts</span></span>): <span class="hljs-title">Response</span>
+                        </span>{
+                            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">render</span>(<span class="hljs-string">&#x27;feed.xml.twig&#x27;</span>, [<span class="hljs-string">&#x27;posts&#x27;</span> =&gt; <span class="hljs-variable">$posts</span>-&gt;<span class="hljs-title function_ invoke__">latest</span>(<span class="hljs-number">20</span>)]);
+                        }
+                    </code></pre>
                 </div>
             </section>
         </main>
@@ -119,12 +127,12 @@
                 </div>
                 <div class="site-footer__bottom">
                     <span>© 2026 The Kirigami Team. MIT licensed.</span>
-                    <span>Built with Kirigami · last updated September 10, 2026</span>
+                    <span>Built with Kirigami · last updated September 11, 2026</span>
                 </div>
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>
