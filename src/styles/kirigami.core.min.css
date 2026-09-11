@@ -1937,12 +1937,18 @@ code:not(.hljs) {
   text-transform: uppercase;
 }
 
+:root {
+  --embed-max-width: 40rem;
+}
+
 .embed {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: var(--embed-max-width, 40rem);
+  margin-inline: auto;
   aspect-ratio: 16/9;
   background-color: var(--surface-2);
   background-position: center;
