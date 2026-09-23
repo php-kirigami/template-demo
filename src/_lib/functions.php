@@ -117,9 +117,10 @@ register_hook('post_render', function (string $html): string {
 /* -----------------------------------------------------------------------------
  * Helper — render a breadcrumb <nav> from a trail.
  *
- * fs_get_breadcrumb() resolves its caller from the call stack, so it has to be
- * called *in the page* (not here, not in the layout) and its result passed in.
- * Each sub-page does:  demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot)
+ * fs_get_breadcrumb() walks up from the page being rendered, so it works from a
+ * layout too: _layout/types/feature.before.php calls
+ *     demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot)
+ * for every page with @type feature.
  * -------------------------------------------------------------------------- */
 function demo_breadcrumb(array $trail, ?string $current, string $relroot): string
 {

@@ -77,7 +77,7 @@ $features = [
 
         ```shell
         $ npx kiri build      # dev build — every task once
-        $ npx kiri watch      # rebuild on change (no server)
+        $ npx kiri serve      # rebuild on change + live-reloading local server
         $ npx kiri export     # production build into dist/
         ```
 

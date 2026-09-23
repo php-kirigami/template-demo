@@ -24,4 +24,4 @@ the layout just wraps the converted file.
 - **@kirigami/kiribuild** — deploys on push to `main`
 
 > [!TIP]
-> Run `npx kiri watch` and point VS Code Live Server at `src/` for a live preview.
+> Run `npx kiri serve` for a live preview, or start the dev server from the Kirigami VS Code extension.

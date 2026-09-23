@@ -37,7 +37,8 @@ next to the result:
 | **Data files** | pointing a PHPDOC annotation at a YAML / JSON file to get structured data — including a fetch over the network at build time (`prepros.network: true`). |
 | **Tags & hooks** | registering a custom HTML tag, a Markdown shortcode and render-pipeline hooks from one `_lib/functions.php` includes file. |
 
-Also here: a shared layout (`src/_layout/`), a `@kirigami/canva` design system
+Also here: a shared layout (`src/_layout/`), a `feature` page type that gives
+every feature page its breadcrumb and heading, a `@kirigami/canva` design system
 with a warm "washi paper" palette, light/dark theming with a FOUC-guarded toggle,
 and a CI workflow that builds and deploys to GitHub Pages on every push to `main`.
 
@@ -46,13 +47,13 @@ and a CI workflow that builds and deploys to GitHub Pages on every push to `main
 ```
 .
 ├── kirigami.yaml          # the one config file
-├── CLAUDE.md              # full Kirigami reference for AI assistants (see below)
+├── CLAUDE.md              # project conventions for AI assistants (see below)
 ├── assets/
 │   ├── images/            #   originals for the image autogenerator
 │   └── fonts/
 ├── scripts/               # named PHP scripts for `kiri run`
 └── src/                   # = kirigami.root — the site
-    ├── _layout/           #   header.php / footer.php
+    ├── _layout/           #   header.php / footer.php, types/feature.*.php
     ├── _lib/functions.php #   custom tags / hooks / shortcodes
     ├── _index.php         #   → src/index.html
     ├── features/          #   the five feature pages
@@ -68,19 +69,19 @@ Requires **Node `>= 24`** and **npm `>= 10.2.3`**.
 
 ```console
 npm install
-npx kiri watch      # rebuild on change — no HTTP server, no live-reload
+npx kiri serve      # build, then rebuild on save with a live-reloading local server
 ```
 
-`kiri watch` only rebuilds. Point an editor preview server (e.g. VS Code Live
-Server) at `src/` if you want a browser that refreshes.
-
 ```console
+npx kiri watch      # rebuild on save, no server
 npx kiri build      # one-off dev build
 npx kiri export     # production build into dist/
 npx kiri run <script> [args…]   # run scripts/<script>.php in the PHP runtime
 ```
 
-Every command takes `--help`.
+Every command takes `--help`. In VS Code, the recommended Kirigami extension
+runs the same commands and the dev server from the Command Palette and the
+status bar.
 
 ## Images
 
@@ -99,11 +100,10 @@ publishes `dist/` to GitHub Pages. Enable it once per repo under
 
 ## Claude.ai Ready
 
-This template ships a **`CLAUDE.md`** at the repo root — a complete, self-contained
-reference for the Kirigami toolchain: every `kiri` command, the full `kirigami.yaml`
-schema, the page-authoring model (PHPDOC headers, auto-loaded data files,
-`@content` / `@indent`), the entire PHP class library, the plugin system, and the
-Sass / image pipeline.
+This template ships a **`CLAUDE.md`** at the repo root: the project's conventions,
+the page-authoring model (PHPDOC headers, data files, page types, built-in tags)
+and where to find the full reference, in the READMEs of the installed
+`@kirigami/*` packages, which always match the versions the project uses.
 
 It is read automatically by **[Claude Code](https://claude.com/claude-code)** and
 by **Claude on [claude.ai](https://claude.ai)** when the repo is connected, so an

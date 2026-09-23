@@ -9,23 +9,65 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kirigami Demo — Fold PHP into flat HTML.</title>
         <meta name="description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
-        <meta name="author" content="The Kirigami Team">
-        <link rel="canonical" href="https://php-kirigami.github.io/template-demo/">
-        <meta property="og:type" content="website">
-        <meta property="og:site_name" content="Kirigami Demo">
-        <meta property="og:title" content="Kirigami Demo">
-        <meta property="og:description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
-        <meta property="og:url" content="https://php-kirigami.github.io/template-demo/">
-        <meta name="twitter:card" content="summary_large_image">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
         <meta name="generator" content="Kirigami">
+        <meta name="author" content="The Kirigami Team">
+        <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Kirigami Demo — Fold PHP into flat HTML.">
         <meta name="twitter:description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
+        <meta property="og:site_name" content="Kirigami Demo">
         <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Kirigami Demo — Fold PHP into flat HTML.">
+        <meta property="og:description" content="A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.">
+        <meta property="og:url" content="https://php-kirigami.github.io/template-demo/">
+        <link rel="canonical" href="https://php-kirigami.github.io/template-demo/">
+        <link rel="author" type="text/plain" href="./humans.txt">
         <link rel="icon" type="image/x-icon" href="./favicon.ico">
         <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/template-demo/#organization",
+                        "name": "Kirigami Demo",
+                        "url": "https://php-kirigami.github.io/template-demo/",
+                        "description": "A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.",
+                        "email": "hello@example.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/template-demo/#website",
+                        "url": "https://php-kirigami.github.io/template-demo/",
+                        "name": "Kirigami Demo",
+                        "description": "A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/template-demo/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency"
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/template-demo/#webpage",
+                        "url": "https://php-kirigami.github.io/template-demo/",
+                        "name": "Kirigami Demo",
+                        "description": "A guided tour of Kirigami — the zero-dependency static site generator that compiles PHP page templates to plain HTML, running PHP 8.5 in WebAssembly.",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/template-demo/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/template-demo/#organization"
+                        },
+                        "inLanguage": "en"
+                    }
+                ]
+            }
+        </script>
     </head>
     <body class="page-home">
         <a class="skip-link" href="#main">Skip to content</a>
@@ -127,12 +169,14 @@
                     </code></pre>
                     <pre><code class="hljs language-shell">
                         <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri build      <span class="hljs-comment"># dev build — every task once</span></span>
-                        <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri watch      <span class="hljs-comment"># rebuild on change (no server)</span></span>
+                        <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri serve      <span class="hljs-comment"># rebuild on change + live-reloading local server</span></span>
                         <span class="hljs-meta prompt_">$ </span><span class="language-bash">npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment"># production build into dist/</span></span>
                     </code></pre>
-                    <span class="badge badge--accent">Zero deps</span>
-                    <span class="badge badge--ok">No PHP install</span>
-                    <span class="badge badge--muted">No headless browser</span>
+                    <p>
+                        <span class="badge badge--accent">Zero deps</span>
+                        <span class="badge badge--ok">No PHP install</span>
+                        <span class="badge badge--muted">No headless browser</span>
+                    </p>
                 </div>
             </section>
         </main>
@@ -162,7 +206,7 @@
                 </div>
                 <div class="site-footer__bottom">
                     <span>© 2026 The Kirigami Team. MIT licensed.</span>
-                    <span>Built with Kirigami · last updated September 11, 2026</span>
+                    <span>Built with Kirigami · last updated September 23, 2026</span>
                 </div>
             </div>
         </footer>

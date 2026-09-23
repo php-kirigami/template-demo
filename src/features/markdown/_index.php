@@ -2,6 +2,7 @@
 /**
  * @title      Markdown
  * @section    features
+ * @type       feature
  * @breadcrumb true
  * @position   1
  * @kicker     Content
@@ -9,56 +10,46 @@
  */
 ?>
 
-<?php echo demo_breadcrumb(fs_get_breadcrumb(), $title, $relroot); ?>
+<div class="prose">
+    <markdown>
+    Everything between the markdown tags is converted with `md_to_html()` after PHP
+    runs. Common leading indentation is stripped first, so it sits neatly inside
+    indented layout markup.
 
-<section class="section wrap">
-    <div class="section__head">
-        <p class="eyebrow">Feature</p>
-        <h1 class="section__title">Markdown</h1>
-        <p class="section__intro"><?php echo str_htmlesc($abstract); ?></p>
-    </div>
+    ## GFM essentials
 
-    <div class="prose">
-        <markdown>
-        Everything between the markdown tags is converted with `md_to_html()` after PHP
-        runs. Common leading indentation is stripped first, so it sits neatly inside
-        indented layout markup.
+    | Surface   | Call                    | Alignment |
+    |:----------|:------------------------|----------:|
+    | Tag       | `<markdown>` block      |     right |
+    | Data file | `@content _page.md`     |    center |
+    | PHP       | `md_to_html($string)`   |      left |
 
-        ## GFM essentials
+    Task lists, strikethrough and autolinks all work:
 
-        | Surface   | Call                    | Alignment |
-        |:----------|:------------------------|----------:|
-        | Tag       | `<markdown>` block      |     right |
-        | Data file | `@content _page.md`     |    center |
-        | PHP       | `md_to_html($string)`   |      left |
+    - [x] ATX + Setext headings with an auto `id`
+    - [x] Footnotes[^engine]
+    - [ ] ~~A build server~~
 
-        Task lists, strikethrough and autolinks all work:
+    > [!NOTE]
+    > Alerts — `[!NOTE]`, `[!TIP]`, `[!WARNING]` — render as styled callouts.
 
-        - [x] ATX + Setext headings with an auto `id`
-        - [x] Footnotes[^engine]
-        - [ ] ~~A build server~~
+    [^engine]: The parser is a single ~1200-line zero-dependency PHP class.
 
-        > [!NOTE]
-        > Alerts — `[!NOTE]`, `[!TIP]`, `[!WARNING]` — render as styled callouts.
+    ## Shortcode plugins
 
-        [^engine]: The parser is a single ~1200-line zero-dependency PHP class.
+    Registered once in `_lib/functions.php`, then usable anywhere Markdown is parsed
+    — a markdown block, a `.md` data file, or a raw `md_to_html()` call.
 
-        ## Shortcode plugins
+    {% callout info "The callout shortcode" Wrapped text becomes a styled box, with an optional bold title. %}
 
-        Registered once in `_lib/functions.php`, then usable anywhere Markdown is parsed
-        — a markdown block, a `.md` data file, or a raw `md_to_html()` call.
+    {% checklist "Ship checklist"
+    Write the page
+    Run npx kiri export
+    Push to main
+    %}
 
-        {% callout info "The callout shortcode" Wrapped text becomes a styled box, with an optional bold title. %}
+    This project also registers its own **badge** shortcode:
 
-        {% checklist "Ship checklist"
-        Write the page
-        Run npx kiri export
-        Push to main
-        %}
-
-        This project also registers its own **badge** shortcode:
-
-        {% badge accent New %} {% badge ok Stable %} {% badge muted Draft %}
-        </markdown>
-    </div>
-</section>
+    {% badge accent New %} {% badge ok Stable %} {% badge muted Draft %}
+    </markdown>
+</div>

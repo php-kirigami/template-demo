@@ -7,11 +7,10 @@ Project-specific tasks for this repo. Toolchain / plugin / core work lives in
 
 ## Open
 
-- **Still trimming `kirigami.core.js`.** The theme toggle now comes from
-  `import "@kirigami/canva/theme"` (commit 032da41); canva floor bumped to
-  `^2.1.0`. Reveal-on-scroll (`@kirigami/canva/observer`) and the burger nav
-  (`@kirigami/canva/components/burger`) could move too, trimming the file to
-  near-empty — the better demo of "you don't write this yourself".
+- **Still trimming `kirigami.core.js`.** The theme toggle and reveal-on-scroll
+  now come from `@kirigami/canva/theme` and `@kirigami/canva/reveal`. The
+  mobile nav toggle is still hand-written: move it once canva's
+  `components/burger` stub is implemented, trimming the file to near-empty.
 
 - **`image.format` stays `webp`.** avif fails to encode at several sizes in the
   current `@kirigami/php-wasm` `IMG` build. Revisit when that's fixed upstream.

@@ -22,13 +22,11 @@ image:
   dest:   images
 
 
-# SEO / social metadata. This block opts @kirigami/php-prepros' META class in;
-# an empty map is enough — <title>, description, keywords, Open Graph, Twitter
-# Card, canonical, favicon and apple-touch-icon are derived from the `kirigami:`
-# keys above and each page's PHPDOC (@title, @description, @image, @robots, …).
-# Any tag _layout/header.php already writes by hand is detected and skipped.
-# Nest a `jsonld:` sub-block here too for schema.org JSON-LD — its own
-# independent opt-in (see php-prepros' README).
+# SEO: <title>, description, keywords, Open Graph, Twitter Card, canonical,
+# favicon and a schema.org JSON-LD graph, derived from the `kirigami:` keys above
+# and each page's PHPDOC (@title, @description, @image, @robots, …). An empty map
+# is enough; `jsonld: false` drops the JSON-LD. Tags _layout/header.php writes
+# by hand are skipped.
 seo: {}
 
 
@@ -38,6 +36,10 @@ prepros:
   before:   _layout/header.php
   after:    _layout/footer.php
   includes: [_lib/functions.php]
+  types:                 # a page opts in with @type <name>
+    feature:             # breadcrumb + eyebrow + title + intro around each Features page
+      before: _layout/types/feature.before.php
+      after:  _layout/types/feature.after.php
 
 
 plugins:
