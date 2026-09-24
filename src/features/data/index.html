@@ -185,18 +185,19 @@
                             <h1 id="kirigami">Kirigami</h1>
                             <p><strong>A static site generator that turns PHP into fast, dependency-free HTML — no server required.</strong></p>
                             <p>
-                                <a href="./LICENSE"><img loading="lazy" src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+                                <a href="./LICENSE"><img loading="lazy" src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg" alt="License: GPL-3.0-or-later"></a>
                                 <a href="#requirements"><img loading="lazy" src="https://img.shields.io/badge/node-%3E%3D24.0.0-brightgreen" alt="Node"></a>
                             </p>
                         </div>
                         <hr>
                         <h2 id="overview">Overview</h2>
+                        <p>Read the <a href="docs/USER-GUIDE.md">user guide</a> to build a first site, the <a href="docs/API.md">Project API reference</a> to embed the engine, or the <a href="docs/INTERNALS.md">internal execution guide</a> to work on Kirigami itself.</p>
                         <p><strong>Kirigami</strong> lets you build static websites using a language you already know — <strong>PHP</strong> — and compiles them straight into clean, production-ready HTML. There&apos;s no server to provision, no runtime to patch, and no infrastructure to maintain: the PHP engine runs entirely in <strong>WebAssembly</strong> (via <code>@kirigami/php-wasm</code>), directly inside the Node.js process. You get the full expressiveness of PHP templating with the simplicity, speed, and portability of a static site.</p>
                         <p>Here&apos;s what Kirigami brings to your workflow:</p>
                         <ul>
                             <li><strong>Real PHP templating</strong> — includes, loops, Markdown, YAML — compiled directly to clean HTML, no server needed at runtime.</li>
                             <li><strong>Integrated asset pipeline</strong> with esbuild for JS and Sass for styles, wired in from the start.</li>
-                            <li><strong>A <code>watch</code> mode with hot-reload</strong>, so changes show up instantly during development.</li>
+                            <li><strong>A <code>serve</code> mode with browser reload</strong>, so changes show up instantly during development.</li>
                             <li><strong>A single-command production export</strong> — a fully static site ready to deploy anywhere (GitHub Pages, Netlify, any static host), complete with a license banner and an auto-generated sitemap.</li>
                             <li><strong>Instant project scaffolding</strong> from official templates via <code>kiri create</code>.</li>
                             <li><strong>Scriptable automation</strong>, running PHP scripts on demand or as build-pipeline hooks with <code>kiri run</code>.</li>
@@ -205,37 +206,33 @@
                         <hr>
                         <h2 id="table-of-contents">Table of contents</h2>
                         <ul>
+                            <li><a href="#kirigami">Kirigami</a></li>
+                            <li><a href="#overview">Overview</a></li>
+                            <li><a href="#monorepo-structure">Monorepo structure</a></li>
+                            <li><a href="#requirements">Requirements</a></li>
+                            <li><a href="#installation">Installation</a></li>
+                            <li><a href="#quick-start">Quick start</a></li>
+                            <li><a href="#cli-commands">CLI commands</a></li>
                             <li>
-                                <a href="#kirigami">Kirigami</a>
+                                <a href="#configuration-kirigamiyaml">Configuration (<code>kirigami.yaml</code>)</a>
                                 <ul>
-                                    <li><a href="#overview">Overview</a></li>
-                                    <li><a href="#table-of-contents">Table of contents</a></li>
-                                    <li><a href="#monorepo-structure">Monorepo structure</a></li>
-                                    <li><a href="#requirements">Requirements</a></li>
-                                    <li><a href="#installation">Installation</a></li>
-                                    <li><a href="#quick-start">Quick start</a></li>
-                                    <li><a href="#cli-commands">CLI commands</a></li>
-                                    <li>
-                                        <a href="#configuration-kirigamiyaml">Configuration (<code>kirigami.yaml</code>)</a>
-                                        <ul>
-                                            <li><a href="#kirigami--core-project-settings"><code>kirigami:</code> — core project settings</a></li>
-                                            <li><a href="#prepros--the-php--html-compiler"><code>prepros:</code> — the PHP → HTML compiler</a></li>
-                                            <li><a href="#image--image-autogenerator"><code>image:</code> — image autogenerator</a></li>
-                                            <li><a href="#plugins--kirigami-plugins"><code>plugins:</code> — Kirigami plugins</a></li>
-                                            <li><a href="#esbuild--sass--global-build-options"><code>esbuild:</code> / <code>sass:</code> — global build options</a></li>
-                                            <li><a href="#export--production-export-options"><code>export:</code> — production export options</a></li>
-                                            <li><a href="#scripts--named-php-scripts"><code>scripts:</code> — named PHP scripts</a></li>
-                                            <li><a href="#tasks--the-build-pipeline"><code>tasks:</code> — the build pipeline</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#continuous-deployment">Continuous deployment</a></li>
-                                    <li><a href="#license">License</a></li>
-                                    <li><a href="#author">Author</a></li>
+                                    <li><a href="#kirigami--core-project-settings"><code>kirigami:</code> — core project settings</a></li>
+                                    <li><a href="#prepros--the-php--html-compiler"><code>prepros:</code> — the PHP → HTML compiler</a></li>
+                                    <li><a href="#image--image-autogenerator"><code>image:</code> — image autogenerator</a></li>
+                                    <li><a href="#plugins--kirigami-plugins"><code>plugins:</code> — Kirigami plugins</a></li>
+                                    <li><a href="#esbuild--sass--global-build-options"><code>esbuild:</code> / <code>sass:</code> — global build options</a></li>
+                                    <li><a href="#export--production-export-options"><code>export:</code> — production export options</a></li>
+                                    <li><a href="#scripts--named-php-scripts"><code>scripts:</code> — named PHP scripts</a></li>
+                                    <li><a href="#tasks--the-build-pipeline"><code>tasks:</code> — the build pipeline</a></li>
                                 </ul>
                             </li>
+                            <li><a href="#continuous-deployment">Continuous deployment</a></li>
+                            <li><a href="#license">License</a></li>
+                            <li><a href="#author">Author</a></li>
                         </ul>
                         <hr>
                         <h2 id="monorepo-structure">Monorepo structure</h2>
+                        <p>The current working tree includes the core/API split; these docs describe checked-in behavior, not registry publication status. <a href="docs/BUGS.md">Known issues</a> and <a href="docs/AUDIT-2026-09-20.md">the audit</a> track the remaining implementation defects.</p>
                         <p>This repository is an npm workspaces monorepo, organized as follows:</p>
                         <table>
                             <thead>
@@ -246,8 +243,20 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td><a href="./packages/cli"><code>packages/cli</code></a></td>
+                                    <td>The <code>kiri</code> terminal interface.</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="./packages/mcp"><code>packages/mcp</code></a></td>
+                                    <td>MCP tools for project discovery and operations.</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="./packages/vscode"><code>packages/vscode</code></a></td>
+                                    <td>VS Code extension scaffold; activation/packaging remain under validation.</td>
+                                </tr>
+                                <tr>
                                     <td><a href="./packages/kirigami"><code>packages/kirigami</code></a></td>
-                                    <td>The heart of the project: the <code>kiri</code> CLI (build, export, watch, run, create, phpinfo).</td>
+                                    <td>The programmatic <code>Project</code> engine shared by the CLI, MCP server, and editor extension.</td>
                                 </tr>
                                 <tr>
                                     <td><a href="./packages/php-prepros"><code>packages/php-prepros</code></a></td>
@@ -291,13 +300,14 @@
                         </ul>
                         <hr>
                         <h2 id="installation">Installation</h2>
-                        <p>Get the CLI via the <a href="./packages/kirigami"><code>@kirigami/kirigami</code></a> package:</p>
+                        <p>Get the CLI via the <a href="./packages/cli"><code>@kirigami/cli</code></a> package:</p>
                         <pre><code class="hljs language-bash">
-                            npm install -D @kirigami/kirigami
+                            npm install -D @kirigami/cli
                         </code></pre>
                         <p>That&apos;s it — the <code>kiri</code> command is ready to go (via <code>npx kiri</code> or an npm script).</p>
                         <hr>
                         <h2 id="quick-start">Quick start</h2>
+                        <p>Create every layout file referenced below relative to <code>kirigami.root</code>. Watch and serve do not perform an initial build. <code>kiri create</code> currently has dependency/banner lookup defects after the CLI split; use a template checkout until <a href="docs/AUDIT-2026-09-20.md">A05</a> is fixed.</p>
                         <ol>
                             <li>Drop a <code>kirigami.yaml</code> at the root of your project:</li>
                         </ol>
@@ -317,7 +327,8 @@
                             <li>Fire up dev mode and watch it come alive:</li>
                         </ol>
                         <pre><code class="hljs language-bash">
-                            npx kiri watch
+                            npx kiri build
+                            npx kiri serve
                         </code></pre>
                         <ol start="4">
                             <li>Ship it! Export the fully static site for production:</li>
@@ -341,7 +352,7 @@
                                 </tr>
                                 <tr>
                                     <td><code>kiri export</code></td>
-                                    <td>Compiles and exports the project for production (forces every task + copies static files).</td>
+                                    <td>Compiles and exports the project for production (runs eligible tasks plus implicit rendering and a static-file copy).</td>
                                 </tr>
                                 <tr>
                                     <td><code>kiri watch</code></td>
@@ -490,7 +501,8 @@
                             </tbody>
                         </table>
                         <h3 id="prepros-the-php-html-compiler"><code>prepros:</code> — the PHP → HTML compiler</h3>
-                        <p>Just declaring this block (even empty) automatically prepends a forced <code>prepros</code> task that renders every page and regenerates <code>sitemap.xml</code>.</p>
+                        <p>Declaring this block prepends a forced <code>prepros</code> task that renders pages and regenerates <code>sitemap.xml</code> and <code>robots.txt</code>. Set <code>before</code> and <code>after</code> to existing layout files: an empty block currently causes PHP warnings.</p>
+                        <p><code>prepros.head</code> controls managed asset/theme injection; set it to <code>false</code> to opt out. <code>prepros.types</code> maps page-type names to extra <code>before</code>/<code>after</code> wrappers, selected by a page’s <code>@type</code> annotation. The separate top-level <code>seo</code> block opts into managed metadata and can contain <code>jsonld</code>. See <a href="packages/php-prepros/README.md#configuration--kirigamiyaml">the complete PHP configuration reference</a>.</p>
                         <table>
                             <thead>
                                 <tr>
@@ -576,6 +588,7 @@
                         <h3 id="esbuild-sass-global-build-options"><code>esbuild:</code> / <code>sass:</code> — global build options</h3>
                         <p>Both are free-form objects passed straight through to the underlying build call, <em>after</em> Kirigami&apos;s own defaults (so they can override them): <code>esbuild:</code> maps to esbuild&apos;s own <a href="https://esbuild.github.io/api/#build-api" target="_blank" rel="noopener noreferrer"><code>BuildOptions</code></a>, <code>sass:</code> to Dart Sass&apos;s own <a href="https://sass-lang.com/documentation/js-api/interfaces/options/" target="_blank" rel="noopener noreferrer"><code>Options</code></a>. <code>sass:</code> also accepts <code>before</code> / <code>after</code> — arrays of extra <code>.scss</code> files compiled respectively before and after the entry (paths relative to <code>cwd()</code>). Leaving a block empty (as in the example above) is equivalent to omitting it entirely.</p>
                         <h3 id="export-production-export-options"><code>export:</code> — production export options</h3>
+                        <p>Export rejects equal, ancestor, or descendant source/output paths before clearing the destination, including symlink/junction aliases. PHP files (case-insensitive <code>.php</code>) and dot-prefixed directories are excluded from the copy. Add <code>export.ignore</code> rules for any other project-specific private files.</p>
                         <table>
                             <thead>
                                 <tr>
@@ -646,13 +659,14 @@
                                 </tr>
                                 <tr>
                                     <td><code>dist</code></td>
-                                    <td>Copies <code>kirigami.root</code> into the export output dir. Implicit/forced only, added automatically by <code>kiri export</code>.</td>
+                                    <td>Copies <code>kirigami.root</code> into the export output dir. Added automatically by <code>kiri export</code>; explicit entries need <code>force: true</code> to build.</td>
                                     <td><code>name</code>, <code>path</code></td>
                                 </tr>
                             </tbody>
                         </table>
                         <hr>
                         <h2 id="continuous-deployment">Continuous deployment</h2>
+                        <p>The sibling action currently falls back to installing <code>@kirigami/kirigami</code>. For the CLI split, include <code>@kirigami/cli</code> in the site’s dependencies so a local <code>kiri</code> exists. Verify the action migration before relying on its fallback.</p>
                         <p>Kirigami ships an official reusable GitHub Action, <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer"><code>php-kirigami/kiribuild</code></a> (<strong>v2</strong>) — published on the <a href="https://github.com/marketplace/actions/kiribuild" target="_blank" rel="noopener noreferrer"><strong>GitHub Marketplace</strong></a>, installable straight from a workflow file&apos;s Actions sidebar. The action itself only installs Node + <code>kiri</code> and runs <code>kiri export</code> — checkout, committing back whatever the build regenerated, and the actual Pages upload/deploy are wired by the caller&apos;s own workflow steps, so the full flow stays explicit:</p>
                         <pre><code class="hljs language-yaml">
                             <span class="hljs-comment"># .github/workflows/page.yml</span>
@@ -664,7 +678,7 @@
                             <span class="hljs-attr">jobs:</span>
                               <span class="hljs-attr">build-and-deploy:</span>
                                 <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
-                                <span class="hljs-attr">environment:</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">github-pages</span>, <span class="hljs-attr">url:</span> <span class="hljs-string">$<span class="hljs-template-variable">{{ steps.deployment.outputs.page_url }}</span></span> }
+                                <span class="hljs-attr">environment:</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">github-pages</span>, <span class="hljs-attr">url:</span> <span class="hljs-string">&quot;$<span class="hljs-template-variable">{{ steps.deployment.outputs.page_url }}</span>&quot;</span> }
                                 <span class="hljs-attr">steps:</span>
                                   <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v7</span>
 
@@ -689,10 +703,12 @@
                         <p>Every official template (<code>kiri create</code>) already ships this workflow at <code>.github/workflows/page.yml</code> — copy it from there. Check the <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer">action&apos;s own documentation</a> for its inputs.</p>
                         <hr>
                         <h2 id="license">License</h2>
-                        <p>This project is distributed under the <a href="./LICENSE">MIT license</a>, except for the <code>@kirigami/php-wasm</code> package, which is distributed under <strong>GPL-2.0-or-later</strong> (see its <a href="./packages/php-wasm/README.md">README</a>).</p>
+                        <p>The project core is licensed under <code>GPL-3.0-or-later</code>.</p>
+                        <p><code>packages/php-wasm</code> is intentionally kept as a separate runtime package and keeps its own license terms in <a href="./packages/php-wasm/LICENSE"><code>packages/php-wasm/LICENSE</code></a>. The same approach applies to other binary or upstream-derived packages, such as <code>@kirigami/audiowaveform-wasm</code> and <code>@kirigami/bestframe</code>.</p>
+                        <p>This separation is deliberate: the main Kirigami project is distributed as GPL-3 software, while the PHP/WASM runtime is treated as a distinct binary component with its own provenance and licensing constraints. See <a href="./NOTICE"><code>NOTICE</code></a> for the repository-level licensing summary.</p>
                         <hr>
                         <h2 id="author">Author</h2>
-                        <p>MIT © Maxime Larrivée-Roy, 2026</p>
+                        <p>GPL-3.0-or-later © Maxime Larrivée-Roy, 2026</p>
                     </details>
                 </div>
             </section>
@@ -723,7 +739,7 @@
                 </div>
                 <div class="site-footer__bottom">
                     <span>© 2026 The Kirigami Team. MIT licensed.</span>
-                    <span>Built with Kirigami · last updated September 23, 2026</span>
+                    <span>Built with Kirigami · last updated September 24, 2026</span>
                 </div>
             </div>
         </footer>
