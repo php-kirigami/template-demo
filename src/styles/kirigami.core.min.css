@@ -1539,6 +1539,20 @@ a {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+:root:not([data-theme=dark]) .hljs-numbered {
+  counter-reset: hljs-line;
+}
+:root:not([data-theme=dark]) .hljs-numbered .hljs-line::before {
+  content: counter(hljs-line);
+  counter-increment: hljs-line;
+  display: inline-block;
+  min-width: 2ch;
+  margin-right: 1.25rem;
+  color: #6B7480;
+  opacity: 0.6;
+  text-align: right;
+  user-select: none;
+}
 :root:not([data-theme=dark]) .hljs-copy {
   color: #6B7480;
   background: rgb(90.2117647059%, 90.5411764706%, 91.0117647059%);
@@ -1696,6 +1710,20 @@ a {
     text-decoration: underline;
     text-underline-offset: 2px;
   }
+  :root:not([data-theme=light]) .hljs-numbered {
+    counter-reset: hljs-line;
+  }
+  :root:not([data-theme=light]) .hljs-numbered .hljs-line::before {
+    content: counter(hljs-line);
+    counter-increment: hljs-line;
+    display: inline-block;
+    min-width: 2ch;
+    margin-right: 1.25rem;
+    color: #98A2B0;
+    opacity: 0.6;
+    text-align: right;
+    user-select: none;
+  }
   :root:not([data-theme=light]) .hljs-copy {
     color: #98A2B0;
     background: rgb(22.1960784314%, 24.4549019608%, 27.3098039216%);
@@ -1851,6 +1879,20 @@ a {
   color: rgb(100%, 59.0706109033%, 52.1568627451%);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+[data-theme=dark] .hljs-numbered {
+  counter-reset: hljs-line;
+}
+[data-theme=dark] .hljs-numbered .hljs-line::before {
+  content: counter(hljs-line);
+  counter-increment: hljs-line;
+  display: inline-block;
+  min-width: 2ch;
+  margin-right: 1.25rem;
+  color: #98A2B0;
+  opacity: 0.6;
+  text-align: right;
+  user-select: none;
 }
 [data-theme=dark] .hljs-copy {
   color: #98A2B0;
