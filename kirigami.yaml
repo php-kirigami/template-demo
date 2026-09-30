@@ -71,6 +71,19 @@ plugins:
   - name: "@kirigami/plugin-embed"
     active: true
 
+  # <player src="…"> / <playlist src="….m3u"> — SoundCloud-style audio players.
+  # The waveform, duration, ID3 tags and cover art are baked at build time with
+  # audiowaveform-wasm and cached in src/_data/player/ (commit it); the cover
+  # goes through the image pipeline. Only a small playback script is shipped.
+  - name: "@kirigami/plugin-player"
+    active: true
+
+  # <clip src="…"> / <inline-clip src="…"> — local video files. bestframe picks
+  # the poster at build time (cached in src/_data/clip/, published like
+  # <img asset>); <inline-clip> is a silent, looping, autoplaying <video>.
+  - name: "@kirigami/plugin-clip"
+    active: true
+
 
 sass:
   style: expanded

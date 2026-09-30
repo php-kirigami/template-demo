@@ -25,7 +25,7 @@ you this exact project to strip down and build on.
 
 ## What's inside
 
-The home page (`src/_index.php`) links to five feature pages under
+The home page (`src/_index.php`) links to seven feature pages under
 `src/features/`, each demonstrating one Kirigami capability with its source shown
 next to the result:
 
@@ -36,6 +36,8 @@ next to the result:
 | **Code** | fenced code blocks highlighted at build time by `@kirigami/plugin-highlight` (highlight.js spans baked in, nothing shipped to the browser) plus its copy button. |
 | **Data files** | pointing a PHPDOC annotation at a YAML / JSON file to get structured data — including a fetch over the network at build time (`prepros.network: true`). |
 | **Tags & hooks** | registering a custom HTML tag, a Markdown shortcode and render-pipeline hooks from one `_lib/functions.php` includes file. |
+| **Audio** | `<player>` / `<playlist>` from `@kirigami/plugin-player`: a waveform, tags and cover art baked at build time from the audio file, cached in `src/_data/player/`. |
+| **Video** | `<clip>` / `<inline-clip>` from `@kirigami/plugin-clip`: a local video whose poster is picked at build time by `@kirigami/bestframe`, and a silent looping clip. |
 
 Also here: a shared layout (`src/_layout/`), a `feature` page type that gives
 every feature page its breadcrumb and heading, a `@kirigami/canva` design system
@@ -56,7 +58,7 @@ and a CI workflow that builds and deploys to GitHub Pages on every push to `main
     ├── _layout/           #   header.php / footer.php, types/feature.*.php
     ├── _lib/functions.php #   custom tags / hooks / shortcodes
     ├── _index.php         #   → src/index.html
-    ├── features/          #   the five feature pages
+    ├── features/          #   the seven feature pages
     ├── about/
     ├── styles/            #   Sass entry, compiled to *.min.css
     ├── scripts/           #   esbuild entry, bundled to *.min.js

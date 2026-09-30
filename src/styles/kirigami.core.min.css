@@ -1992,4 +1992,276 @@ a {
   height: 100%;
   border: 0;
 }
+
+.player {
+  --progress: 0;
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
+  padding: 0.75rem;
+  background-color: var(--surface-2);
+  border-radius: 0.4rem;
+}
+
+.player__cover {
+  flex: none;
+  align-self: flex-start;
+  width: clamp(4rem, 22vw, 6.5rem);
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.player__cover--empty {
+  display: grid;
+  place-items: center;
+  background-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+}
+.player__cover--empty::before {
+  content: "♪";
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.player__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.player__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.player__toggle {
+  flex: none;
+  width: 2.75rem;
+  aspect-ratio: 1/1;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--surface-2);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.player__toggle:hover, .player__toggle:focus-visible {
+  transform: scale(1.08);
+}
+
+.player__icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.player__icon-pause {
+  display: none;
+}
+
+.player.is-playing .player__icon-play {
+  display: none;
+}
+.player.is-playing .player__icon-pause {
+  display: inline;
+}
+
+.player__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.player__artist,
+.player__format {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+.player__format {
+  letter-spacing: 0.08em;
+}
+
+.player__title {
+  font-weight: 600;
+}
+
+.player__artist,
+.player__format,
+.player__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player__wave {
+  position: relative;
+  height: 3.5rem;
+  color: currentColor;
+  cursor: pointer;
+  touch-action: pan-y;
+  user-select: none;
+}
+.player__wave:focus-visible {
+  outline: 0.15rem solid var(--accent);
+  outline-offset: 0.15rem;
+}
+
+.player__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 0.1rem;
+  opacity: 0.35;
+}
+.player__svg path {
+  vector-effect: non-scaling-stroke;
+}
+
+.player__svg--progress {
+  color: var(--accent);
+  opacity: 1;
+  clip-path: inset(0 calc((1 - var(--progress)) * 100%) 0 0);
+}
+
+.player__times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+@media (max-width: 24rem) {
+  .player {
+    flex-direction: column;
+  }
+  .player__cover {
+    align-self: stretch;
+    width: 100%;
+    aspect-ratio: 2/1;
+  }
+}
+.playlist__tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.clip {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: var(--clip-max-width, 40rem);
+  margin-inline: auto;
+  background-color: #000;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.clip__poster {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.clip--portrait {
+  aspect-ratio: var(--clip-portrait-ratio, 16/9);
+}
+.clip--portrait .clip__poster {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: contain;
+}
+
+.clip__poster--empty {
+  aspect-ratio: 16/9;
+  background-color: var(--surface-2);
+}
+
+.clip__play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+.clip__play .clip__icon {
+  width: 5rem;
+  aspect-ratio: 1/1;
+  filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.45));
+  transition: transform 0.15s;
+}
+.clip__play:hover .clip__icon, .clip__play:focus-visible .clip__icon {
+  transform: scale(1.1);
+}
+
+.clip__title {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0.6rem 0.8rem;
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.clip__duration {
+  position: absolute;
+  inset: 0.6rem 0.6rem auto auto;
+  padding: 0.15rem 0.4rem;
+  background-color: rgba(0, 0, 0, 0.65);
+  border-radius: 0.2rem;
+  color: #fff;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.inline-clip {
+  display: block;
+  width: 100%;
+  max-width: var(--inline-clip-max-width, none);
+  height: auto;
+  margin-inline: auto;
+}
+
+.clip__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+.clip.is-playing .clip__play,
+.clip.is-playing .clip__title,
+.clip.is-playing .clip__duration {
+  display: none;
+}
 /*# sourceMappingURL=kirigami.core.min.css.map */
